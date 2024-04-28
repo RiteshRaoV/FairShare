@@ -1,13 +1,17 @@
 package splitwise.project.splitwise.Services;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import splitwise.project.splitwise.DTO.GroupDTO;
 import splitwise.project.splitwise.Model.Group;
 import splitwise.project.splitwise.Model.User;
 import splitwise.project.splitwise.Repository.GroupRepository;
 
+@Service
 public class GroupServiceImpl implements GroupService {
 
     @Autowired
@@ -75,6 +79,17 @@ public class GroupServiceImpl implements GroupService {
         groupUsers.remove(user);
         group.setGroupMembers(groupUsers);
         groupRepository.save(group);
+    }
+
+    @Override
+    public Group createGroup(GroupDTO groupDTO) {
+        Group newGroup=new Group();
+        newGroup.setGroupName(groupDTO.getGroupName());
+        newGroup.setGroupMembers(groupDTO.getParticipants());
+        newGroup.setCurrency(groupDTO.getCurrency());
+        newGroup.setGroupType(groupDTO.getGroupType());
+        newGroup.setStartDate(LocalDate.now());
+        return newGroup;
     }
 
 }

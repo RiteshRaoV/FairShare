@@ -28,6 +28,7 @@ public class Expense {
     private Long expenseId;
     private String expenseName;
     private String expenseType;
+    private String currency;
     private LocalDate expenseDate;
     @ManyToOne
     @JoinColumn(name = "expense_payer_id")
@@ -36,6 +37,6 @@ public class Expense {
     @JoinTable(name = "expense_payed_to", joinColumns = @JoinColumn(name = "expense_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> expensePayedTo;
     private String expenseReceipt;
-    @ManyToMany(mappedBy = "expenses")
-    private List<Group> expenseGroups;
+    // @ManyToMany(mappedBy = "expenses")
+    // private List<Group> expenseGroups;
 }

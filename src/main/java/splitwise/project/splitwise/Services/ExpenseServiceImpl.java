@@ -3,10 +3,12 @@ package splitwise.project.splitwise.Services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import splitwise.project.splitwise.Model.Expense;
 import splitwise.project.splitwise.Repository.ExpenseRepository;
 
+@Service
 public class ExpenseServiceImpl implements ExpenseService {
 
     @Autowired

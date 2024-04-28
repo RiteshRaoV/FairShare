@@ -29,12 +29,13 @@ public class Group {
     private Long groupId;
     private String groupName;
     private String groupType;
+    private String currency;
     private LocalDate startDate;
     private LocalDate endDate;
     @ManyToMany
     @JoinTable(name = "group_members", joinColumns = @JoinColumn(name = "group_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> groupMembers;
     private Double totalExpense;
-    @ManyToMany(mappedBy = "expenseGroups")
-  private List<Expense> expenses;
+    // @ManyToMany(mappedBy = "expenseGroups")
+    // private List<Expense> expenses;
 }
