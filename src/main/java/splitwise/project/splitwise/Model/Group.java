@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,18 +25,19 @@ import lombok.Setter;
 @Table(name = "user_group")
 public class Group {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long groupId;
-    private String groupName;
-    private String groupType;
-    private String currency;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    @ManyToMany
-    @JoinTable(name = "group_members", joinColumns = @JoinColumn(name = "group_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private List<User> groupMembers;
-    private Double totalExpense;
-    // @ManyToMany(mappedBy = "expenseGroups")
-    // private List<Expense> expenses;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long groupId;
+  private String groupName;
+  private String groupType;
+  private String currency;
+  private LocalDate startDate;
+  private LocalDate endDate;
+  private Double totalExpense;
+  @ManyToMany
+  @JoinTable(name = "group_members", joinColumns = @JoinColumn(name = "group_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+  private List<User> groupMembers;
+  @OneToMany(mappedBy = "group") // MappedBy refers to the field in Expense
+  private List<Expense> expenses;
+
 }

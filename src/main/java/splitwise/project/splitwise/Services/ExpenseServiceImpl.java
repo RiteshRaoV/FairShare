@@ -48,7 +48,7 @@ public class ExpenseServiceImpl implements ExpenseService {
 
     @Override
     public List<Expense> getAllExpenseOfGroup(long groupId) {
-        return expenseRepository.findByExpenseGroupsId(groupId);
+        return expenseRepository.findByGroup_GroupId(groupId);
     }
 
 }

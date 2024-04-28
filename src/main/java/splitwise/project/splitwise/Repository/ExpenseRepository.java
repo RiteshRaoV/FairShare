@@ -9,8 +9,10 @@ import splitwise.project.splitwise.Model.Expense;
 
 @Repository
 public interface ExpenseRepository extends JpaRepository<Expense, Long> {
+
+    // Existing method:
     List<Expense> findByExpensePayerUserId(Long userId);
 
-    List<Expense> findByExpenseGroupsId(Long groupId);
-
+    // New method to find expenses by group:
+    List<Expense> findByGroup_GroupId(Long groupId);
 }
