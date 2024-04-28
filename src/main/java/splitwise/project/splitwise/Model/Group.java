@@ -35,4 +35,6 @@ public class Group {
     @JoinTable(name = "group_members", joinColumns = @JoinColumn(name = "group_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> groupMembers;
     private Double totalExpense;
+    @ManyToMany(mappedBy = "expenseGroups")
+  private List<Expense> expenses;
 }
