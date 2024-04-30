@@ -10,13 +10,15 @@ import splitwise.project.splitwise.DTO.GroupDTO;
 import splitwise.project.splitwise.Model.Group;
 import splitwise.project.splitwise.Model.User;
 import splitwise.project.splitwise.Repository.GroupRepository;
+import splitwise.project.splitwise.Repository.UserRepository;
 
 @Service
 public class GroupServiceImpl implements GroupService {
 
     @Autowired
     private GroupRepository groupRepository;
-
+    @Autowired
+    private UserRepository userRepository;
     @Override
     public List<User> getAllGroupMembers(long groupId) {
         Group group = groupRepository.findById(groupId).get();
@@ -54,10 +56,11 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public Group addUsersToGroup(long groupId, List<User> user) {
+    public Group addUsersToGroup(long groupId, List<Long> userIds) {
         Group group = groupRepository.findById(groupId).get();
         List<User> groupUsers = group.getGroupMembers();
-        groupUsers.addAll(user);
+        List<User> users=userRepository.findAllByUserIds(userIds);
+        groupUsers.addAll(users);
         group.setGroupMembers(groupUsers);
         groupRepository.save(group);
         return group;
@@ -83,13 +86,17 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public Group createGroup(GroupDTO groupDTO) {
+        List<Long> userIds=groupDTO.getParticipants();
+
         Group newGroup=new Group();
         newGroup.setGroupName(groupDTO.getGroupName());
-        newGroup.setGroupMembers(groupDTO.getParticipants());
+        newGroup.setGroupMembers(userRepository.findAllByUserIds(userIds));
         newGroup.setCurrency(groupDTO.getCurrency());
         newGroup.setGroupType(groupDTO.getGroupType());
         newGroup.setStartDate(LocalDate.now());
-        return newGroup;
+        newGroup.setTotalExpense(0.0);
+        return groupRepository.save(newGroup);
+
     }
 
 }

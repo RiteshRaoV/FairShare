@@ -18,9 +18,10 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public ResponseEntity<User> getUser(User user) {
+    public ResponseEntity<User> addUser(User user) {
         User savedUser = userService.addUser(user);
         return ResponseEntity.ok(savedUser);
     }
+
 
 }

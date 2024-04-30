@@ -19,7 +19,7 @@ public interface GroupService {
 
     Group addUserToGroup(long groupId, User user);
 
-    Group addUsersToGroup(long groupId, List<User> user);
+    Group addUsersToGroup(long groupId, List<Long> userId);
 
     void removeUsersFromGroup(long groupId, List<User> user);
 

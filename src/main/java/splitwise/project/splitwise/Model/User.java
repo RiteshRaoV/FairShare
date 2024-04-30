@@ -3,6 +3,8 @@ package splitwise.project.splitwise.Model;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,6 +16,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 
 @Entity
 @NoArgsConstructor
@@ -30,8 +33,12 @@ public class User {
     private String email;
     private int age;
     private LocalDate birthDate;
+
+    @JsonIgnore // Add this annotation to ignore JSON serialization of groups
     @ManyToMany(mappedBy = "groupMembers")
     private List<Group> groups;
-    @OneToMany(mappedBy = "expensePayedTo")
+
+    @JsonIgnore // Add this annotation to ignore JSON serialization of expenses
+    @OneToMany(mappedBy = "expensePayer")
     private List<Expense> expenses;
 }

@@ -3,6 +3,8 @@ package splitwise.project.splitwise.Model;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,6 +19,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 @Entity
 @Getter
 @Setter
@@ -25,19 +28,24 @@ import lombok.Setter;
 @Table(name = "user_group")
 public class Group {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long groupId;
-  private String groupName;
-  private String groupType;
-  private String currency;
-  private LocalDate startDate;
-  private LocalDate endDate;
-  private Double totalExpense;
-  @ManyToMany
-  @JoinTable(name = "group_members", joinColumns = @JoinColumn(name = "group_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
-  private List<User> groupMembers;
-  @OneToMany(mappedBy = "group") // MappedBy refers to the field in Expense
-  private List<Expense> expenses;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long groupId;
+
+    private String groupName;
+    private String groupType;
+    private String currency;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private Double totalExpense;
+
+    @JsonIgnore // Add this annotation to ignore JSON serialization of groupMembers
+    @ManyToMany
+    @JoinTable(name = "group_members", joinColumns = @JoinColumn(name = "group_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private List<User> groupMembers;
+
+    @JsonIgnore // Add this annotation to ignore JSON serialization of expenses
+    @OneToMany(mappedBy = "group") // MappedBy refers to the field in Expense
+    private List<Expense> expenses;
 
 }
