@@ -2,11 +2,11 @@ package splitwise.project.splitwise.Services;
 
 import java.util.List;
 
+import splitwise.project.splitwise.DTO.ExpenseDTO;
 import splitwise.project.splitwise.Model.Expense;
 
 public interface ExpenseService {
 
-    Expense addExpense(Expense expense);
 
     void removeExpense(long expenseId);
 
@@ -19,4 +19,6 @@ public interface ExpenseService {
     List<Expense> getAllExpenseOfUser(long userId);
 
     List<Expense> getAllExpenseOfGroup(long groupId);
+
+    void addExpense(ExpenseDTO expenseDTO);
 }
