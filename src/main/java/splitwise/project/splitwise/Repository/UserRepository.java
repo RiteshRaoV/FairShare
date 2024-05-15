@@ -12,4 +12,7 @@ import splitwise.project.splitwise.Model.User;
 public interface UserRepository extends JpaRepository<User, Long> {
     @Query(value = "select * from user where user_id in :ids",nativeQuery = true)
     List<User> findAllByUserIds(List<Long> ids);
+
+    @Query(value = "select * from user where user_id=:userId",nativeQuery = true)
+    User findByUserId(Long userId);
 }

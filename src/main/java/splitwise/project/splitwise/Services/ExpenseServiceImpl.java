@@ -66,17 +66,17 @@ public class ExpenseServiceImpl implements ExpenseService {
         expense.setCurrency(expenseDTO.getCurrency());
         expense.setExpenseDate(expenseDTO.getExpenseDate());
 
-        User expensePayer = userRepository.findById(expenseDTO.getExpensePayerId()).get();
+        User expensePayer = userRepository.findByUserId(expenseDTO.getExpensePayerId());
         expense.setExpensePayer(expensePayer);
 
         List<User> expensePayedTo = new ArrayList<>();
         for (Long userId : expenseDTO.getExpensePayedToIds()) {
-            User user = userRepository.findById(userId).get();
+            User user = userRepository.findByUserId(userId);
             expensePayedTo.add(user);
         }
         expense.setExpensePayedTo(expensePayedTo);
 
-        Group group = groupRepository.findById(expenseDTO.getGroupId()).get();
+        Group group = groupRepository.findByGroupId(expenseDTO.getGroupId());
 
         group.getExpenses().add(expense);
         expense.setGroup(group);
