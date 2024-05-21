@@ -30,6 +30,7 @@ public class Expense {
     private String expenseName;
     private String expenseType;
     private String currency;
+    private double amount;
     private LocalDate expenseDate;
 
     @JsonIgnore // Add this annotation to ignore JSON serialization of expensePayer

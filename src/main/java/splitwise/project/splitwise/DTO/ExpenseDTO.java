@@ -16,6 +16,7 @@ public class ExpenseDTO {
     private String expenseName;
     private String expenseType;
     private String currency;
+    private double amount;
     private LocalDate expenseDate;
     private Long expensePayerId;
     private List<Long> expensePayedToIds;

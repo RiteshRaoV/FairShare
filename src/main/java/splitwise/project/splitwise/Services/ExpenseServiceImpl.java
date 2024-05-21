@@ -64,6 +64,7 @@ public class ExpenseServiceImpl implements ExpenseService {
         expense.setExpenseName(expenseDTO.getExpenseName());
         expense.setExpenseType(expenseDTO.getExpenseType());
         expense.setCurrency(expenseDTO.getCurrency());
+        expense.setAmount(expenseDTO.getAmount());
         expense.setExpenseDate(expenseDTO.getExpenseDate());
 
         User expensePayer = userRepository.findByUserId(expenseDTO.getExpensePayerId());

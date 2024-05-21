@@ -4,12 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import splitwise.project.splitwise.DTO.ExpenseDTO;
 import splitwise.project.splitwise.Services.ExpenseService;
 
 @RestController
+@RequestMapping("/expenses")
 public class ExpenseController {
 
     @Autowired

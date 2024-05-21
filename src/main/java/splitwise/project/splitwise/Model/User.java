@@ -1,6 +1,7 @@
 package splitwise.project.splitwise.Model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -30,9 +31,15 @@ public class User {
     private Long userId;
     private String firstName;
     private String lastName;
-    private String email;
-    private int age;
     private LocalDate birthDate;
+    private String email;
+    private String password;
+    private String role;
+	private String resetToken;
+	private LocalDateTime passwordResetTokenDateTime;
+	private LocalDateTime verificationTokenDateTime;
+	private boolean verificationStatus;
+
 
     @JsonIgnore // Add this annotation to ignore JSON serialization of groups
     @ManyToMany(mappedBy = "groupMembers")
