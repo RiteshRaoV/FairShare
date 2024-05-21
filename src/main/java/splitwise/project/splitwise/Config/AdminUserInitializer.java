@@ -27,10 +27,10 @@ public class AdminUserInitializer implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        if (!userService.existsByEmail("admin@fairsplit.com")) {
+        if (!userService.existsByEmail("admin@fairshare.com")) {
             User adminUser = new User();
             adminUser.setFirstName("Admin");
-            adminUser.setEmail("admin@fairsplit.com");
+            adminUser.setEmail("admin@fairshare.com");
             adminUser.setPassword(encoder.encode("admin")); 
             adminUser.setRole("ROLE_ADMIN");
             adminUser.setVerificationStatus(true);
