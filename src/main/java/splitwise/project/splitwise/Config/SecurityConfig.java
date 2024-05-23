@@ -46,6 +46,7 @@ public class SecurityConfig {
                         .requestMatchers("/swagger-ui.html/**").hasRole("ADMIN")
                         .requestMatchers("/**").permitAll())
                 .formLogin(login -> login
+                        .loginPage("/user/login")
                         .loginProcessingUrl("/userLogin")
                         .successHandler(sucessHandler)
                         .permitAll())

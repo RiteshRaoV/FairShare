@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignUp - FairShare</title>
+    <link rel="stylesheet" th:href="@{/loginPage.css}">
+</head>
+<body>
+    <div class="login-card">
+        <h2 class="login-title">Welcome to FairShare</h2>
+        <form th:action="@{/user/sign-up}" method="post" onsubmit="return validateForm()">
+            <input class="text-input" name="firstName" placeholder="First Name" type="text" required>
+            <input class="text-input" name="lastName" placeholder="Last Name" type="text" required>
+            <input class="text-input" name="email" placeholder="Email" type="email" required>
+            <input class="date-input" name="birthDate" type="date" required>
+            <input class="password-input" id="password" name="password" placeholder="New Password" type="password" required>
+            <input class="password-input" id="confirm-password" name="confirmPassword" placeholder="Confirm Password" type="password" required>
+            <button type="submit" class="login-button">Sign Up</button>
+        </form>
+        
+        <div class="login-footer">
+            <a th:href="@{/forgot-password}" class="forgot-password">Forgot Password?</a>
+            <span> | </span>
+            <a th:href="@{/user/sign-in}" class="sign-up">Sign in</a>
+        </div>
+    </div>
+</body>
+<script>
+    function validateForm() {
+      var password = document.getElementById("password").value;
+      var confirmPassword = document.getElementById("confirm-password").value;
+  
+      if (password !== confirmPassword) {
+        alert("Passwords do not match");
+        return false;
+      }
+  
+      return true;
+    }
+</script>
+</html>

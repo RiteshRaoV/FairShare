@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - FairShare</title>
+    <link rel="stylesheet" th:href="@{/loginPage.css}">
+</head>
+<body>
+    <div class="login-card">
+        <h2 class="login-title">Welcome to FairShare</h2>
+        <form th:action="@{/userLogin}" method="post">
+            <input class="email" name="username" placeholder="Email" type="email" required>
+            <input class="password" name="password" placeholder="Password" type="password" required>
+            <button type="submit" class="login-button">Login</button>
+        </form>
+        <div class="login-footer">
+            <a th:href="@{/forgot-password}" class="forgot-password">Forgot Password?</a>
+            <span> | </span>
+            <a th:href="@{/user/sign-up}" class="sign-up">Sign Up</a>
+        </div>
+    </div>
+</body>
+</html>
