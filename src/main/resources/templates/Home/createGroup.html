@@ -50,7 +50,7 @@
                             <select id="currencySymbol" required>
                                 <option value="$">$</option>
                                 <option value="€">€</option>
-                                <option value="£">£</option>
+                                <option value="£">&#x20B9;</option>
                             </select>
                             <small>We’ll use it to display amounts.</small>
                         </div>
@@ -61,14 +61,19 @@
             <div class="participants-container">
                 <div class="participants">
                     <h2>Participants</h2>
-                    <small>Enter the name for each participant</small>
+                    <div class="search-container">
+                        <span class="search-icon"><i class="fas fa-search"></i></span> 
+                        <input type="text" placeholder="Search">
+                    </div>
                     <div id="participantsList">
                         <div class="participant">
-                            <input type="text" placeholder="Participant Name" required>
+                            <input type="text" placeholder="Participant Name" required >
                             <button class="remove-participant" onclick="removeParticipant(this)"><i class="fas fa-trash-alt"></i></button>
                         </div>
                     </div>
+                    <small>Enter the name for each participant</small>
                     <button class="add-participant" onclick="addParticipant()"><i class="fas fa-plus"></i> Add Participant</button>
+
                 </div>
             </div>
 
