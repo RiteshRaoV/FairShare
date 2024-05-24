@@ -1,16 +1,10 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
-}
-
-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: #F5F7FA;
-    color: #333;
+/* Navbar Styling */
+header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
 }
 
 .navbar {
@@ -21,6 +15,7 @@ body {
     align-items: center;
     padding: 15px 30px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    animation: fadeIn 0.5s ease-in-out;
 }
 
 .navbar-brand {
@@ -128,19 +123,4 @@ body {
 
 .logout-button:hover {
     background-color: #C0392B;
-}
-
-.container {
-    padding: 40px;
-    width: 100%;
-    max-width: 1200px;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.navbar {
-    animation: fadeIn 0.5s ease-in-out;
 }
