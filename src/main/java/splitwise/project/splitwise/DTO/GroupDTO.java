@@ -6,11 +6,12 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import splitwise.project.splitwise.Model.User;
+import lombok.Setter;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Setter
 public class GroupDTO {
     private String groupName;
     private String currency;
