@@ -22,6 +22,9 @@ function searchParticipants() {
 
 function addParticipant(user) {
   if (!participants.includes(user.userId)) {
+    document.getElementById("participantSearch").value=""
+    document.getElementById("searchResults").style.display = "none";
+
     participants.push(user.userId);
     const participantsList = document.getElementById("participantsList");
     const participantDiv = document.createElement("div");
@@ -45,6 +48,8 @@ function addParticipant(user) {
     participantDiv.appendChild(input);
     participantDiv.appendChild(removeButton);
     participantsList.appendChild(participantDiv);
+  }else{
+    alert("user already added")
   }
 }
 
@@ -56,44 +61,49 @@ function removeParticipant(userId, button) {
 function createGroup() {
   let groupName = document.getElementById("groupName").value;
   let currencySymbol = document.getElementById("currencySymbol").value;
+  let type=document.getElementById("groupType").value;
 
   let groupDTO = {
-      groupName: groupName,
-      currency: currencySymbol,
-      participants: participants, // Assuming participants is defined elsewhere
+    groupName: groupName,
+    currency: currencySymbol,
+    groupType:type,
+    participants: participants, // Assuming participants is defined elsewhere
   };
 
-  fetch('http://localhost:1111/group/create', {
-      method: 'POST',
+  if (groupDTO.groupName != "") {
+    fetch("http://localhost:1111/group/create", {
+      method: "POST",
       headers: {
-          'Content-Type': 'application/json',
-          // Add any additional headers if needed
+        "Content-Type": "application/json",
+        // Add any additional headers if needed
       },
       body: JSON.stringify(groupDTO),
-  })
-  .then(response => {
-      if (!response.ok) {
-          throw new Error('Network response was not ok');
-      }
-      return response.json();
-  })
-  .then(data => {
-      // Handle success response from server
-      console.log('Group created successfully:', data);
-  })
-  .catch(error => {
-      // Handle error
-      console.error('There was a problem creating the group:', error);
-  });
-  
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        alert("group created successfully")
+        clearParticipants();
+        return response.json();
+      })
+      .then((data) => {
+        // Handle success response from server
+        console.log("Group created successfully:", data);
+      })
+      .catch((error) => {
+        // Handle error
+        console.error("There was a problem creating the group:", error);
+      });
+  }else{
+    alert("enter a group name");
+
+  }
 }
 
+// function clearParticipants() {
 
-function clearParticipants() {
-  participants = [];
-  document.getElementById("participantsList").innerHTML = "";
-  document.getElementById("participantSearch").value="";
-}
+// }
 
 function removeParticipant(button) {
   const participantDiv = button.parentElement;
@@ -101,30 +111,17 @@ function removeParticipant(button) {
 }
 
 function clearParticipants() {
+  participants = [];
+  document.getElementById("participantsList").innerHTML = "";
+  document.getElementById("participantSearch").value = "";
+  document.getElementById("groupName").value = "";
   const participantsList = document.getElementById("participantsList");
   while (participantsList.firstChild) {
     participantsList.removeChild(participantsList.firstChild);
   }
-  document.getElementById("participantSearch").value="";
-  document.getElementById("searchResults").style.display="none";
+  document.getElementById("participantSearch").value = "";
+  document.getElementById("searchResults").style.display = "none";
+  document.getElementById("groupName").value = "";
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-  closeProfileModal();
-});
-function openProfileModal() {
-  const modal = document.getElementById("profileModal");
-  modal.style.display = "block";
-}
 
-function closeProfileModal() {
-  const modal = document.getElementById("profileModal");
-  modal.style.display = "none";
-}
-
-window.onclick = function (event) {
-  const modal = document.getElementById("profileModal");
-  if (event.target === modal) {
-    modal.style.display = "none";
-  }
-};

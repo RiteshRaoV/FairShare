@@ -34,8 +34,8 @@ public class UserServiceImpl implements UserService {
         newUser.setPassword(password);
         newUser.setFirstName(user.getFirstName());
         newUser.setLastName(user.getLastName());
-		newUser.setRole("USER");
-        newUser.setVerificationStatus(false);
+		newUser.setRole("ROLE_USER");
+        newUser.setVerificationStatus(true);
         newUser.setVerificationTokenDateTime(LocalDateTime.now());
         return userRepository.save(newUser);
     }

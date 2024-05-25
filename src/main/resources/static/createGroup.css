@@ -19,7 +19,7 @@ main {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    padding-top: 100px; /* Adjusted to account for fixed header */
+    padding-top: 60px; /* Adjusted to account for fixed header */
 }
 
 .container {
@@ -62,7 +62,7 @@ h2 {
 } */
 .form-side{
     display: flex;
-    align-items: center;
+    align-items: normal;
     justify-content:space-evenly;
 
 }
@@ -87,7 +87,7 @@ input {
     margin-top: 10px;
 }
 #groupName{
-    width: 400px;
+    width: 250px;
     padding: 0.75rem;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -110,7 +110,7 @@ select{
 small {
     display: block;
     color: #999;
-    width: 200px;
+    width: fit-content;
 }
 
 select {
@@ -216,10 +216,3 @@ select {
     color: #ccc; /* Adjust based on your design */
 }
 
-
-
-/* Keyframes */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
-}

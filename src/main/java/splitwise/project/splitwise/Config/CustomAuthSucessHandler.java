@@ -37,23 +37,19 @@ public class CustomAuthSucessHandler implements AuthenticationSuccessHandler {
             throw new UsernameNotFoundException("User not found with username: " + username);
         }
 
-        Map<String, String> redirectMap = new HashMap<>();
-
         if (!user.isVerificationStatus()) {
-            redirectMap.put("redirectUrl", "/verifyAccount"); // Redirect to a page for verifying the account
-        } else {
-            Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
-            if (roles.contains("ROLE_ADMIN")) {
-                redirectMap.put("redirectUrl", "/swagger-ui.html");
-            } else {
-                redirectMap.put("redirectUrl", "/balances/1");
-            }
+			request.getSession().setAttribute("verificationMessage", "Your account is not verified. Please verify your account.");
+            response.sendRedirect("/user/sign-in"); // Redirect to a page for verifying the account
+            return;
         }
 
-        // Convert the map to JSON and write it to the response
-        ObjectMapper objectMapper = new ObjectMapper();
-        response.setContentType("application/json");
-        response.getWriter().write(objectMapper.writeValueAsString(redirectMap));
+        Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
+
+        if (roles.contains("ROLE_ADMIN")) {
+            response.sendRedirect("/swagger-ui.html");
+        }else{
+            response.sendRedirect("/user/home");
+        }
     }
 
 }

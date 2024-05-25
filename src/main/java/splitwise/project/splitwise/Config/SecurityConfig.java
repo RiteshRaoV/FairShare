@@ -42,7 +42,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/user").permitAll()
-                        .requestMatchers("/expenses/**", "/group", "/user","/balances/**").hasAnyRole("USER","ADMIN")
+                        .requestMatchers("/expenses/**", "/group", "/user/**","/balances/**").hasAnyRole("USER","ADMIN")
                         .requestMatchers("/swagger-ui.html/**").hasRole("ADMIN")
                         .requestMatchers("/**").permitAll())
                 .formLogin(login -> login

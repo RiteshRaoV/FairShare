@@ -42,4 +42,9 @@ public class UserController {
         return "Auth/signUpPage";
     }
 
+    @GetMapping("/home")
+    public String homePage(){
+        return "Home/homePage";
+    }
+
 }

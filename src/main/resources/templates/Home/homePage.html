@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My FairShare - Welcome</title>
+    <link rel="stylesheet" th:href="@{/homePage.css}">
+</head>
+<body class="body-xjr82">
+    <header class="header-lpq29">
+        <div th:replace="fragments/navBar :: navBar"></div>
+    </header>
+    <div class="welcome-container-vkh35">
+        <h1 class="welcome-heading-qwe87">Welcome to My FairShare</h1>
+        <main class="main-content-jka72">
+            <p class="welcome-text-bvd83">Your go-to platform for seamless group expense management.</p>
+            <button class="create-group-btn-pmc18" onclick="redirectToCreateGroup()">Create Group</button>
+        </main>
+    </div>
+
+    <script>
+        function redirectToCreateGroup() {
+            // Handle redirection here
+            window.location.href = '/group/create';
+        }
+    </script>
+</body>
+</html>
+

@@ -4,9 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Group Information - FairShare</title>
-    <!-- <link rel="stylesheet" href="createGroup.css">
-    <link rel="stylesheet" href="../Auth/navBar.css"> -->
-    <link rel="stylesheet" th:href="@{/navBar.css}" />
     <link rel="stylesheet" th:href="@{/createGroup.css}" />
 
     <link
@@ -16,36 +13,7 @@
   </head>
   <body>
     <header>
-      <nav class="navbar">
-        <div class="navbar-brand">
-          <a href="#" class="navbar-logo">FairShare</a>
-        </div>
-        <ul class="navbar-links">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Dashboard</a></li>
-          <li><a href="#">Expenses</a></li>
-          <li><a href="#">Groups</a></li>
-          <li>
-            <a
-              href="#"
-              id="profileIcon"
-              class="profile-icon"
-              onclick="openProfileModal()"
-            >
-              <img src="profile-icon.png" alt="Profile" />
-            </a>
-          </li>
-        </ul>
-      </nav>
-      <!-- Modal -->
-      <div id="profileModal" class="modal">
-        <div class="modal-content">
-          <span class="close" onclick="closeProfileModal()">&times;</span>
-          <h2>User Profile</h2>
-          <p id="username">John Doe</p>
-          <button class="logout-button">Logout</button>
-        </div>
-      </div>
+      <div th:replace="fragments/navBar :: navBar"></div>
     </header>
     <main>
       <div class="container">
@@ -64,13 +32,23 @@
                 <small>give a name for your group.</small>
               </div>
               <div class="form-group">
-                <label for="currencySymbol">Currency Symbol</label>
+                <label for="currencySymbol">Currency</label>
                 <select id="currencySymbol" required>
                   <option value="$">$</option>
                   <option value="€">€</option>
                   <option value="£">£</option>
                 </select>
                 <small>We’ll use it to display amounts.</small>
+              </div>
+              <div class="form-group">
+                <label for="groupType">Type</label>
+                <select id="groupType" required>
+                  <option value="trip">Trip </option>
+                  <option value="home">Home</option>
+                  <option value="team-outing">Team Outing</option>
+                  <option value="date">Date</option>
+                </select>
+                <small>We’ll use it classyfy group.</small>
               </div>
             </div>
           </div>
@@ -79,6 +57,8 @@
         <div class="participants-container">
           <div class="participants">
             <h2>Participants</h2>
+            <small>Enter the name of the participant</small>
+
             <div class="search-container">
               <span class="search-icon"><i class="fas fa-search"></i></span>
               <input
@@ -89,7 +69,7 @@
               />
             </div>
             <div id="search-results" class="search-results">
-                <select id="searchResults" class="search-results" size="5" onchange="selectParticipant(this)" style="height: 40px; margin-top: -8px; margin-left: 10px; width: 120px; display: none; "></select>
+                <select id="searchResults" class="search-results" size="3" onchange="selectParticipant(this)" style="height: fit-content;margin-top: -8px; margin-left: 10px; width: fit-content; display: none; "></select>
             </div>
             <div id="participantsList">
               <!-- <div class="participant">
@@ -102,7 +82,7 @@
                 </button>
               </div> -->
             </div>
-            <small>Enter the name for each participant</small>
+            <!-- <small>Enter the name of the participant</small> -->
             <!-- <button class="add-participant" onclick="addParticipant()">
               <i class="fas fa-add"></i> Invite
             </button> -->

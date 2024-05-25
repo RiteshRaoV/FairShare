@@ -1,13 +1,4 @@
-/* Navbar Styling */
-header {
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-}
-
-.navbar {
+.navbar-zxq47 {
     width: 100%;
     background-color: #008080;
     display: flex;
@@ -18,58 +9,58 @@ header {
     animation: fadeIn 0.5s ease-in-out;
 }
 
-.navbar-brand {
+.navbar-brand-lpq92 {
     font-size: 26px;
     font-weight: bold;
     color: white;
 }
 
-.navbar-logo {
+.navbar-logo-tgq39 {
     color: white;
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
-.navbar-logo:hover {
+.navbar-logo-tgq39:hover {
     color: #18BC9C;
 }
 
-.navbar-links {
+.navbar-links-wms84 {
     list-style: none;
     display: flex;
     align-items: center;
 }
 
-.navbar-links li {
+.navbar-links-wms84 li {
     margin-left: 25px;
 }
 
-.navbar-links a {
+.navbar-links-wms84 a {
     color: white;
     text-decoration: none;
     font-size: 16px;
     transition: color 0.3s ease;
 }
 
-.navbar-links a:hover {
+.navbar-links-wms84 a:hover {
     color: #18BC9C;
 }
 
-.profile-icon img {
-    width: 40px;
-    height: 40px;
+.profile-icon-ytn62 img {
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.profile-icon img:hover {
+.profile-icon-ytn62 img:hover {
     transform: scale(1.1);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Modal styling */
-.modal {
+.modal-qwr37 {
     display: none;
     position: fixed;
     z-index: 1000;
@@ -84,7 +75,7 @@ header {
     display: flex;
 }
 
-.modal-content {
+.modal-content-kdx45 {
     background-color: #ffffff;
     margin: auto;
     padding: 30px;
@@ -97,7 +88,7 @@ header {
     animation: fadeIn 0.5s ease;
 }
 
-.close {
+.close-rpc29 {
     color: #aaaaaa;
     float: right;
     font-size: 28px;
@@ -105,13 +96,13 @@ header {
     cursor: pointer;
 }
 
-.close:hover,
-.close:focus {
+.close-rpc29:hover,
+.close-rpc29:focus {
     color: #000;
     text-decoration: none;
 }
 
-.logout-button {
+.logout-button-pmc18 {
     background-color: #E74C3C;
     color: white;
     padding: 10px 20px;
@@ -121,6 +112,12 @@ header {
     transition: background-color 0.3s ease;
 }
 
-.logout-button:hover {
+.logout-button-pmc18:hover {
     background-color: #C0392B;
+}
+
+/* Keyframes */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
