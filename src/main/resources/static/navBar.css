@@ -1,6 +1,6 @@
 .navbar-zxq47 {
     width: 100%;
-    background-color: #008080;
+    background-color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -12,11 +12,11 @@
 .navbar-brand-lpq92 {
     font-size: 26px;
     font-weight: bold;
-    color: white;
+    color: #008080;
 }
 
 .navbar-logo-tgq39 {
-    color: white;
+    color: #008080;
     text-decoration: none;
     transition: color 0.3s ease;
 }
@@ -36,14 +36,19 @@
 }
 
 .navbar-links-wms84 a {
-    color: white;
+    color: #008080;
     text-decoration: none;
     font-size: 16px;
     transition: color 0.3s ease;
+    
 }
 
 .navbar-links-wms84 a:hover {
     color: #18BC9C;
+    text-decoration: none;
+    border-bottom: 2px solid #008080;
+    transition: 0.1s ease;
+
 }
 
 .profile-icon-ytn62 img {

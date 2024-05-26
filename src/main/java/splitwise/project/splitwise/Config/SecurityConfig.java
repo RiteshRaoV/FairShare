@@ -41,8 +41,8 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/user").permitAll()
-                        .requestMatchers("/expenses/**", "/group", "/user/**","/balances/**").hasAnyRole("USER","ADMIN")
+                        .requestMatchers("/user/sign-in","/user/sign-up").permitAll()
+                        .requestMatchers("/expenses/**", "/group/**", "/user/home","/balances/**").hasAnyRole("USER","ADMIN")
                         .requestMatchers("/swagger-ui.html/**").hasRole("ADMIN")
                         .requestMatchers("/**").permitAll())
                 .formLogin(login -> login
@@ -52,7 +52,7 @@ public class SecurityConfig {
                         .permitAll())
                 .logout(logout -> logout // Configuring logout
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/")
+                        .logoutSuccessUrl("/user/sign-in")
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID")
                         .permitAll())
@@ -60,7 +60,8 @@ public class SecurityConfig {
                 .sessionManagement(management -> management
                         .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
                         .maximumSessions(1)
-                        .expiredUrl("/login?expired"));
+                        .expiredUrl("/login?expired"))
+                        .authenticationProvider(getAuthenticationProvider());
         return http.build();
     }
 }

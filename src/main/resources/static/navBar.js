@@ -18,4 +18,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   };
 
+  function logout() {
+      // Handle redirection here
+      window.location.href = '/logout';
+  }
+
   

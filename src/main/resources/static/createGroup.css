@@ -162,7 +162,6 @@ select {
     display: flex;
     justify-content: left;
     width: 100%;
-    margin-top: 2rem;
 }
 
 .create-button, .cancel-button {
