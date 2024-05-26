@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import splitwise.project.splitwise.Model.Group;
+import splitwise.project.splitwise.Model.User;
 
 @Repository
 public interface GroupRepository extends JpaRepository<Group, Long> {
@@ -14,5 +15,6 @@ public interface GroupRepository extends JpaRepository<Group, Long> {
 
     @Query(value = "select * from user_group where group_id=:groupId",nativeQuery = true)
     Group findByGroupId(Long groupId);
+
 
 }

@@ -36,8 +36,9 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public List<Group> getAllGroupOfUser(long userId) {
-        return groupRepository.findByGroupMembersUserId(userId);
+    public List<Group> getAllGroupOfUser(String email) {
+        User user = userRepository.findByEmail(email);
+        return groupRepository.findByGroupMembersUserId(user.getUserId());
     }
 
     @Override
@@ -97,6 +98,11 @@ public class GroupServiceImpl implements GroupService {
         newGroup.setTotalExpense(0.0);
         return groupRepository.save(newGroup);
 
+    }
+
+    @Override
+    public void deleteGroup(Long groupId) {
+        groupRepository.deleteById(groupId);
     }
 
 }

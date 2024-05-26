@@ -70,4 +70,10 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
+    @Override
+    public Long getUserIdByEmail(String email) {
+        User user=userRepository.findByEmail(email);
+        return user.getUserId();
+    }
+
 }

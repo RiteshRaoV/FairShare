@@ -17,6 +17,8 @@ public interface UserService {
 
     User getUser(long userId);
 
+    Long getUserIdByEmail(String email);
+
     List<User> getAllUsersById(List<Long> userIds);
 
     boolean existsByEmail(String email);

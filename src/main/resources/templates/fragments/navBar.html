@@ -8,7 +8,7 @@
             <li><a th:href="@{/user/home}">Home</a></li>
             <li><a href="#">Dashboard</a></li>
             <li><a href="#">Expenses</a></li>
-            <li><a href="#">Groups</a></li>
+            <li><a th:href="@{/group}">Groups</a></li>
             <li><a href="#" id="profileIcon" class="profile-icon-ytn62" onclick="openProfileModal()" style="border-bottom: none;">
                 <img th:src="@{/admin.png}" alt="Profile">
             </a></li>
@@ -19,8 +19,8 @@
     <div id="profileModal" class="modal-qwr37">
         <div class="modal-content-kdx45">
             <span class="close-rpc29" onclick="closeProfileModal()">&times;</span>
-            <h2>User Profile</h2>
-            <p id="username">Welcome , <span th:text="${#authentication.principal.getName()}"></span></p>
+            <!-- <h2>User Profile</h2> -->
+            <h2 id="username">Welcome! <span th:text="${#authentication.principal.getName()}"></span></h2>
             <button class="logout-button-pmc18" onclick="logout()">Logout</button>
         </div>
     </div>

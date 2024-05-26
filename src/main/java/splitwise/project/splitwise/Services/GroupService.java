@@ -13,7 +13,7 @@ public interface GroupService {
 
     List<Group> getAllGroups();
 
-    List<Group> getAllGroupOfUser(long userId);
+    List<Group> getAllGroupOfUser(String email);
 
     long getGroupSize(long groupId);
 
@@ -24,6 +24,8 @@ public interface GroupService {
     void removeUsersFromGroup(long groupId, List<User> user);
 
     void removeUserFromGroup(long groupId, User user);
+
+    void deleteGroup(Long groupId);
 
     Group createGroup(GroupDTO groupDTO);
 

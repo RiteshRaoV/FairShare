@@ -22,7 +22,7 @@ function searchParticipants() {
 
 function addParticipant(user) {
   if (!participants.includes(user.userId)) {
-    document.getElementById("participantSearch").value=""
+    document.getElementById("participantSearch").value = "";
     document.getElementById("searchResults").style.display = "none";
 
     participants.push(user.userId);
@@ -48,8 +48,8 @@ function addParticipant(user) {
     participantDiv.appendChild(input);
     participantDiv.appendChild(removeButton);
     participantsList.appendChild(participantDiv);
-  }else{
-    alert("user already added")
+  } else {
+    alert("user already added");
   }
 }
 
@@ -61,12 +61,12 @@ function removeParticipant(userId, button) {
 function createGroup() {
   let groupName = document.getElementById("groupName").value;
   let currencySymbol = document.getElementById("currencySymbol").value;
-  let type=document.getElementById("groupType").value;
+  let type = document.getElementById("groupType").value;
 
   let groupDTO = {
     groupName: groupName,
     currency: currencySymbol,
-    groupType:type,
+    groupType: type,
     participants: participants, // Assuming participants is defined elsewhere
   };
 
@@ -83,27 +83,24 @@ function createGroup() {
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
-        alert("group created successfully")
-        clearParticipants();
         return response.json();
       })
       .then((data) => {
         // Handle success response from server
         console.log("Group created successfully:", data);
+        alert("Group created successfully");
+        window.location.href = "/group" // Redirect to the group's details page
       })
       .catch((error) => {
         // Handle error
         console.error("There was a problem creating the group:", error);
+        alert("There was a problem creating the group.");
       });
-  }else{
+  } else {
     alert("enter a group name");
-
   }
 }
 
-// function clearParticipants() {
-
-// }
 
 function removeParticipant(button) {
   const participantDiv = button.parentElement;
@@ -123,5 +120,3 @@ function clearParticipants() {
   document.getElementById("searchResults").style.display = "none";
   document.getElementById("groupName").value = "";
 }
-
-

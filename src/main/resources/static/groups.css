@@ -1,0 +1,101 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background-color: #f4f7f6;
+    color: #333;
+}
+
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn-add {
+    background-color: #e0e0e0;
+}
+
+.btn-create {
+    background-color: #28a745;
+    color: white;
+}
+
+.recent-groups {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.groups-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 15px;
+}
+
+.group-card {
+    position: relative;
+    padding: 15px;
+    height:auto;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.main-container{
+    margin-top: 20px;
+    margin-left: 200px;
+    margin-right: 200px;    
+}
+
+.group-name {
+    font-size: 20px;
+    font-weight: bold;
+    padding-bottom: 30px;
+    color: #333;
+}
+
+.group-date {
+    font-size: 14px;
+    color: #666;
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+}
+
+.group-size {
+    font-size: 14px;
+    color: #666;
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+}
+
+.group-delete{
+    font-size: 14px;
+    color: #666;
+    position: absolute;
+    bottom: 45px;
+    right: 15px;
+}
+.group-delete-button{
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.group-delete-button:hover{
+    transform: scale(1.3);
+}
