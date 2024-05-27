@@ -2,13 +2,17 @@ package splitwise.project.splitwise.Services;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jakarta.transaction.Transactional;
 import splitwise.project.splitwise.DTO.GroupDTO;
+import splitwise.project.splitwise.Model.Expense;
 import splitwise.project.splitwise.Model.Group;
 import splitwise.project.splitwise.Model.User;
+import splitwise.project.splitwise.Repository.ExpenseRepository;
 import splitwise.project.splitwise.Repository.GroupRepository;
 import splitwise.project.splitwise.Repository.UserRepository;
 
@@ -19,6 +23,8 @@ public class GroupServiceImpl implements GroupService {
     private GroupRepository groupRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private ExpenseRepository expenseRepository;
     @Override
     public List<User> getAllGroupMembers(long groupId) {
         Group group = groupRepository.findById(groupId).get();
@@ -101,8 +107,35 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
+    @Transactional
     public void deleteGroup(Long groupId) {
-        groupRepository.deleteById(groupId);
-    }
 
+        Optional<Group> optionalGroup = groupRepository.findById(groupId);
+        if (optionalGroup.isPresent()) {
+            Group group = optionalGroup.get();
+
+            // Remove group association from expenses
+            List<Expense> groupExpenses = group.getExpenses();
+            if (groupExpenses != null && !groupExpenses.isEmpty()) {
+                for (Expense expense : groupExpenses) {
+                    expense.setGroup(null);
+                    expenseRepository.save(expense);
+                }
+            }
+
+            // Remove group association from users
+            List<User> groupMembers = group.getGroupMembers();
+            if (groupMembers != null && !groupMembers.isEmpty()) {
+                for (User user : groupMembers) {
+                    user.getGroups().remove(group);
+                    userRepository.save(user);
+                }
+            }
+
+            // Finally, delete the group
+            groupRepository.delete(group);
+        } else {
+            throw new IllegalArgumentException("Group not found with id: " + groupId);
+        }
+    }   
 }

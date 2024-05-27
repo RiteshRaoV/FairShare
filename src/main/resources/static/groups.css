@@ -96,6 +96,7 @@ body {
     right: 15px;
 }
 .group-delete-button{
+    z-index: 50;
     background: none;
     border: none;
     padding: 0;
