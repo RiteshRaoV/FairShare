@@ -44,7 +44,7 @@
         statsContainer.style.display="block"
         statsBtn.classList.add('active')
         expenseBtn.classList.remove('active')
-
+        balanceBtn.classList.remove('active')
     })
 
     function filterExpenses() {
