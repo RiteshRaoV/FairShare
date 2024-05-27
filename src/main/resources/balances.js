@@ -1,13 +1,7 @@
-import { createUseStyles } from '@mui/styles';
-
-const useStyles = createUseStyles({
-  tableHeaderCell: {
-    colSpan: 2,
-    textAlign: 'center',
-  },
-});
-
-export default function useBalanceStyles() {
-  const classes = useStyles();
-  return classes;
+function markAsPaid(event) {
+  event.preventDefault();
+  const link = event.target;
+  const reimbursement = link.closest('.reimbursement');
+  reimbursement.style.display = 'none';
+  alert('Marked as paid');
 }

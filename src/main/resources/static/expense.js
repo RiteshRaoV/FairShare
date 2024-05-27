@@ -1,5 +1,5 @@
     let expenseContainer = document.querySelector(".mf1");
-    let balanceContainer = document.querySelector(".mf2");
+    let balanceContainer = document.querySelector(".mf5");
     let addExpenseContainer = document.querySelector(".mf3")
     let statsContainer = document.querySelector(".mf4")
     let balanceBtn = document.querySelector(".bln-btn");
@@ -64,3 +64,12 @@
             }
         }
     }
+
+    function markAsPaid(event) {
+        event.preventDefault();
+        const link = event.target;
+        const reimbursement = link.closest('.reimbursement');
+        reimbursement.style.display = 'none';
+        alert('Marked as paid');
+      }
+      

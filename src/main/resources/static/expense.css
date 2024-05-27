@@ -303,6 +303,85 @@
     text-decoration: underline;
 }
 
+/* New Balances and Reimbursements Styles */
+.mf-balances-container {
+    margin-top: 40px;
+}
+
+.mf-balances, .mf-reimbursements {
+    margin-bottom: 40px;
+}
+
+.mf-balances h2, .mf-reimbursements h2 {
+    font-size: 1.8em;
+    color: #333;
+}
+
+.mf-balances p, .mf-reimbursements p {
+    color: #777;
+}
+
+.mf-balance-list, .mf-reimbursement-list {
+    margin-top: 20px;
+}
+
+.mf-balance, .mf-reimbursement {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mf-balance:hover, .mf-reimbursement:hover {
+    background-color: #f8f8f8;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.mf-balance.positive .mf-amount {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  
+  .mf-balance.negative .mf-amount {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+
+.mf-reimbursement .details {
+    color: #333;
+}
+
+.mf-reimbursement .amount {
+    color: #008080;
+}
+
+
+.mf-mark-paid{
+    color: #008080;
+    cursor: pointer;
+    text-decoration: none;
+    margin-left: -700px;
+    font-size: 14px;
+    font-weight: 600;
+}
+input{
+    height: 50px;
+}
+p{
+    margin-top: 10px;
+}
+
+
+.mf-reimbursement .mark-paid:hover {
+    text-decoration: none;
+}
+
 /* Responsive Styles */
 @media (max-width: 768px) {
     .mf-header {
@@ -356,7 +435,7 @@
     }
 
     .mf-expense-name, .mf-expense-amount {
-        font-size: 1em;
+        font-size: 1em;;
     }
 
     .mf-expense-details, .mf-expense-date {

@@ -23,12 +23,12 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/sign-up")
-    public ResponseEntity<?> addUser(@ModelAttribute UserRegistrationDTO user) {
+    public String addUser(@ModelAttribute UserRegistrationDTO user) {
         if (userService.existsByEmail(user.getEmail())) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("User already exists");
+            return "Auth/sign-up";
         } else {
             User newUser = userService.addUser(user);
-            return ResponseEntity.ok(newUser);
+            return "redirect:/user/sign-in";
         }
     }
 

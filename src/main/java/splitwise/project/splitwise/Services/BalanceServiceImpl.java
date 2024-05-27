@@ -1,5 +1,6 @@
 package splitwise.project.splitwise.Services;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,10 +25,12 @@ public class BalanceServiceImpl implements BalanceService {
     @Autowired
     private GroupRepository groupRepository;
 
-    @Override
     public Map<String, Double> calculateBalances(Long groupId) {
         List<Expense> expenses = expenseRepository.findAll(); // Get all expenses
         Map<String, Double> balances = new HashMap<>();
+
+        // Decimal format to limit to 2 decimal places
+        DecimalFormat df = new DecimalFormat("#.##");
 
         for (Expense expense : expenses) {
             if (expense.getGroup().getGroupId().equals(groupId)) {
@@ -36,12 +39,15 @@ public class BalanceServiceImpl implements BalanceService {
                 double splitAmount = expense.getAmount() / participants.size();
 
                 // Update payer balance
-                balances.put(payer.getEmail(), balances.getOrDefault(payer.getEmail(), 0.0) + expense.getAmount());
+                balances.put(payer.getFirstName(),
+                        Double.parseDouble(
+                                df.format(balances.getOrDefault(payer.getFirstName(), 0.0) + expense.getAmount())));
 
                 // Update participants balance
                 for (User participant : participants) {
-                    balances.put(participant.getEmail(),
-                            balances.getOrDefault(participant.getEmail(), 0.0) - splitAmount);
+                    balances.put(participant.getFirstName(),
+                            Double.parseDouble(
+                                    df.format(balances.getOrDefault(participant.getFirstName(), 0.0) - splitAmount)));
                 }
             }
         }
@@ -91,7 +97,7 @@ public class BalanceServiceImpl implements BalanceService {
                 debtors.add(debtor);
             }
         }
-        List<Expense> expenses=expenseRepository.findByGroup_GroupId(groupId);
+        List<Expense> expenses = expenseRepository.findByGroup_GroupId(groupId);
         Group group = groupRepository.findByGroupId(groupId);
         group.setEndDate(LocalDate.now());
         group.setTotalExpense(expenses.stream().mapToDouble(Expense::getAmount).sum());
