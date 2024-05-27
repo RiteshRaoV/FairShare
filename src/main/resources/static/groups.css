@@ -51,12 +51,19 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    transition: all 0.3s;
+}
+.group-card:hover{
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); 
+    transform: scale(1.05);
+
 }
 .main-container{
     margin-top: 20px;
     margin-left: 200px;
     margin-right: 200px;    
 }
+
 
 .group-name {
     font-size: 20px;

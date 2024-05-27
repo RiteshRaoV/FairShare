@@ -63,7 +63,6 @@ public class ExpenseServiceImpl implements ExpenseService {
         Expense expense = new Expense();
         expense.setExpenseName(expenseDTO.getExpenseName());
         expense.setExpenseType(expenseDTO.getExpenseType());
-        expense.setCurrency(expenseDTO.getCurrency());
         expense.setAmount(expenseDTO.getAmount());
         expense.setExpenseDate(expenseDTO.getExpenseDate());
 
@@ -78,11 +77,21 @@ public class ExpenseServiceImpl implements ExpenseService {
         expense.setExpensePayedTo(expensePayedTo);
 
         Group group = groupRepository.findByGroupId(expenseDTO.getGroupId());
-
+        expense.setCurrency(group.getCurrency());
         group.getExpenses().add(expense);
         expense.setGroup(group);
         expenseRepository.save(expense);
         groupRepository.save(group);
+    }
+
+    @Override
+    public double getTotalGroupExpense(long groupId){
+        List<Expense> expenses = expenseRepository.findByGroup_GroupId(groupId);
+        double totalGroupExpense=0;
+        for(Expense expense:expenses){
+            totalGroupExpense+=expense.getAmount();
+        }
+        return totalGroupExpense;
     }
 
 }

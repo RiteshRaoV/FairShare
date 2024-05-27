@@ -62,5 +62,11 @@ public class GroupController {
         groupService.deleteGroup(groupId);
         return ResponseEntity.ok().body("deleted successfully");
     }
+
+    @GetMapping("/members/{groupId}")
+    public ResponseEntity<List<User>> groupMembers(@PathVariable Long groupId){
+        List<User> members = groupService.getAllGroupMembers(groupId);
+        return ResponseEntity.ok(members);
+    }
     
 }

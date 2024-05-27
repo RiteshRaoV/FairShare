@@ -21,4 +21,6 @@ public interface ExpenseService {
     List<Expense> getAllExpenseOfGroup(long groupId);
 
     void addExpense(ExpenseDTO expenseDTO);
+
+    double getTotalGroupExpense(long groupId);
 }

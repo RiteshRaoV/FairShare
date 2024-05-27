@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My FairShare - Dashboard</title>
+    <link rel="stylesheet" th:href="@{/expense.css}">
+    <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    rel="stylesheet"
+  />
+</head>
+<body>
+    <header >
+
+
+        <div th:replace="fragments/navBar :: navBar"></div>
+    </header>
+    <div class="mf-dashboard-container">
+        <nav class="mf-nav">
+            <button class="mf-nav-btn exp-btn active">Expenses</button>
+            <button class="mf-nav-btn bln-btn">Balances</button>
+            <button class="mf-nav-btn sts-btn">Stats</button>
+            <button class="mf-nav-btn">Settings</button>
+            <button class="mf-nav-icon"><i class="fa fa-share"></i></button>
+        </nav>
+        <main class="mf-main-content">
+            <div class="mf-expenses-container mf1" >
+                <div style="display: flex; justify-content: space-between;">
+                    <h2>Expenses</h2><button class="add-exp-btn" ><i class="fas fa-plus" style="color: white;"></i>
+                    </button>
+                </div>
+                <p>Here are the expenses that you created for your group.</p>
+                <div class="mf-search-bar">
+                    <input type="text" id="searchInput" placeholder="Search for an expense..." onkeyup="filterExpenses()">
+                </div>
+                <div class="mf-expenses-list" id="expensesList">
+                    <div th:each="expense : ${expenses}" class="mf-expense-item">
+                        <div class="mf-expense-info">
+                            <div class="mf-expense-icon" th:switch="${expense.expenseType}">
+                                <span th:case="'food'"><img width="50" height="50" src="https://img.icons8.com/ios/50/cutlery.png" alt="cutlery"/></span> <!-- Icon for food expense -->
+                                <span th:case="'travel'"><img width="50" height="50" src="https://img.icons8.com/ios/50/airport.png" alt="airport"/></span> <!-- Icon for travel expense -->
+                                <span th:case="'accommodation'"><img width="50" height="50" src="https://img.icons8.com/ios/50/3-star-hotel.png" alt="3-star-hotel"/></span> <!-- Icon for accommodation expense -->
+                            </div>
+                            <div>
+                                <div class="mf-expense-name" th:text="${expense.expenseName}">Expense Name</div>
+                                <div class="mf-expense-details">
+                                    <span th:text="'Paid by ' + ${expense.expensePayer.firstName} + ' for '"></span>
+                                    <span th:each="user : ${expense.expensePayedTo}" th:text="${user.firstName} + ' '"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mf-expense-amount" th:text="${expense.currency} + ${expense.amount}">Amount</div>
+                        <div class="mf-expense-date" th:text="${expense.expenseDate}">Date</div>
+                    </div>
+                </div>            
+            </div>
+
+            <div class="mf-expenses-container1 mf2">
+                <h2>Balances</h2>
+                <p>Here are the Balances that you created for your group.</p>
+                <div class="mf-search-bar">
+                    <input type="text" placeholder="Search for an expense...">
+                </div>
+                <div class="mf-expenses-list">
+                    <div class="mf-expense-item">
+                        <div class="mf-expense-info">
+                            <div class="mf-expense-icon">🍽️</div>
+                            <div>
+                                <div class="mf-expense-name">Breakfast</div>
+                                <div class="mf-expense-details">Paid by John for John, Jane, Jack</div>
+                            </div>
+                        </div>
+                        <div class="mf-expense-amount">$500.00</div>
+                        <div class="mf-expense-date">May 21, 2024</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mf-create-expense-container mf3" style="display: none;">
+                <h2>Create expense</h2>
+                <form th:action="@{/expenses/add-expense/{groupId}(groupId=${groupId})}"  th:object="${expenseDTO}" method="post">
+                    <input type="hidden" th:field="*{groupId}" th:value="${groupId}" />
+                    <div class="mf-form-row">
+                        <div class="mf-form-column">
+                            <div class="form-group">
+                                <label for="expense-title">Expense title</label>
+                                <input type="text" id="expense-title" th:field="*{expenseName}" placeholder="Enter a description for the expense">
+                            </div>
+                            <div class="form-group">
+                                <label for="expense-category">Category</label>
+                                <select id="expense-category" th:field="*{expenseType}">
+                                    <option value="general">General</option>
+                                    <option value="food">Food</option>
+                                    <option value="travel">Travel</option>
+                                    <option value="accommodation">Accommodation</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="expense-paid-by">Paid by</label>
+                                <select id="expense-paid-by" th:field="*{expensePayerId}">
+                                    <option value="">Select a participant</option>
+                                    <option th:each="member : ${groupMembers}" th:value="${member.userId}" th:text="${member.firstName + ' ' + member.lastName}"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mf-form-column">
+                            <div class="form-group">
+                                <label for="expense-date">Expense date</label>
+                                <input type="date" id="expense-date" th:field="*{expenseDate}">
+                            </div>
+                            <div class="form-group">
+                                <label for="expense-amount">Amount</label>
+                                <input type="number" id="expense-amount" th:field="*{amount}" value="0">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mf-paid-for-container">
+                        <h3>Paid for</h3>
+                        <p>Select who the expense was paid for.</p>
+                        <ul>
+                            <li th:each="member : ${groupMembers}">
+                                <input type="checkbox" th:field="*{expensePayedToIds}" th:value="${member.userId}" th:id="${'member_' + member.userId}">
+                                <label th:for="${'member_' + member.userId}">
+                                    <span th:text="${member.firstName}"></span>
+                                    <span th:if="${member.lastName != null}" th:text="' ' + ${member.lastName}"></span>
+                                </label>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit"><i class="fas fa-save"></i> Save</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="mf-expenses-container1 mf4" style="display: none;">
+                <div class="mf-expenses-container1-title">
+                    <h2>Totals</h2>
+                    <p>Spending summary of the entire group.</p>
+                </div>
+
+                <h4>Total group spendings:</h4>
+                <p class="mf-expenses-container1-currency" th:text="${currency + ' ' + totalGroupSpending}"></p>
+            </div>
+            
+            </div>
+        </main>
+    </div>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>
+
+<script th:src="@{/expense.js}"></script>
