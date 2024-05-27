@@ -109,7 +109,7 @@
                     <img
                       width="64"
                       height="64"
-                      src="https://img.icons8.com/pastel-glyph/64/1A1A1A/whiskey.png"
+                      src="https://img.icons8.com/wired/64/1A1A1A/whiskey.png"
                       alt="whiskey"
                     />
                   </span>
@@ -151,8 +151,10 @@
                   </span>
                 </div>
                 <div>
-                  <div class="mf-expense-name" th:text="${expense.expenseName}">
-                  </div>
+                  <div
+                    class="mf-expense-name"
+                    th:text="${expense.expenseName}"
+                  ></div>
                   <div class="mf-expense-details">
                     <span
                       th:text="'Paid by ' + ${expense.expensePayer.firstName} + ' for '"
@@ -210,7 +212,7 @@
                     <option value="Gifts">Gifts</option>
                     <option value="Transportation">Transportation</option>
                     <option value="Gas/Fuel">Gas/Fuel</option>
-                    <option value="Hotel">Hotel</option>                    
+                    <option value="Hotel">Hotel</option>
                   </select>
                 </div>
                 <div class="form-group">
@@ -300,7 +302,10 @@
                 th:class="${balance.value >= 0 ? 'mf-balance positive' : 'mf-balance negative'}"
               >
                 <span class="mf-name" th:text="${balance.key}"></span>
-                <span class="mf-amount" th:text="${currency + ' ' + balance.value}"></span>
+                <span
+                  class="mf-amount"
+                  th:text="${currency + ' ' + balance.value}"
+                ></span>
               </div>
             </div>
           </div>
@@ -319,9 +324,11 @@
                   <b th:text="${reimbursement.from}"></b> owes
                   <b th:text="${reimbursement.to}"></b>
                 </span>
-                <a href="#" class="mf-mark-paid" onclick="markAsPaid(event)"
-                  ></a
-                >
+                <a
+                  href="#"
+                  class="mf-mark-paid"
+                  onclick="markAsPaid(event)"
+                ></a>
                 <span
                   class="mf-amount"
                   th:text="${currency + ' ' + reimbursement.amount}"
