@@ -196,11 +196,12 @@
                     id="expense-title"
                     th:field="*{expenseName}"
                     placeholder="Enter a description for the expense"
+                    required
                   />
                 </div>
                 <div class="form-group">
                   <label for="expense-category">Category</label>
-                  <select id="expense-category" th:field="*{expenseType}">
+                  <select id="expense-category" th:field="*{expenseType}" required>
                     <option value="General">General</option>
                     <option value="Payment">Payment</option>
                     <option value="Entertainment">Entertainment</option>
@@ -217,7 +218,7 @@
                 </div>
                 <div class="form-group">
                   <label for="expense-paid-by">Paid by</label>
-                  <select id="expense-paid-by" th:field="*{expensePayerId}">
+                  <select id="expense-paid-by" th:field="*{expensePayerId}" required>
                     <option value="">Select a participant</option>
                     <option
                       th:each="member : ${groupMembers}"
@@ -234,6 +235,7 @@
                     type="date"
                     id="expense-date"
                     th:field="*{expenseDate}"
+                    required
                   />
                 </div>
                 <div class="form-group">
@@ -243,6 +245,7 @@
                     id="expense-amount"
                     th:field="*{amount}"
                     value="0"
+                    required
                   />
                 </div>
               </div>
