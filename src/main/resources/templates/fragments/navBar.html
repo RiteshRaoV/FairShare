@@ -4,6 +4,11 @@
         <div class="navbar-brand-lpq92">
             <a th:href="@{/user/home}" class="navbar-logo-tgq39">FairShare</a>
         </div>
+        <div class="burger-menu" onclick="toggleSidebar()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
         <ul class="navbar-links-wms84">
             <li><a th:href="@{/user/home}">Home</a></li>
             <li><a th:href="@{/group/create}">Create</a></li>
@@ -14,11 +19,21 @@
         </ul>
     </nav>
 
+    <!-- Sidebar -->
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="close-btn" onclick="toggleSidebar()">&times;</a>
+        <a th:href="@{/user/home}">Home</a>
+        <a th:href="@{/group/create}">Create</a>
+        <a th:href="@{/group}">Groups</a>
+        <a href="#" id="profileIcon" class="profile-icon-ytn62" onclick="openProfileModal()" style="border-bottom: none;">
+            <img th:src="@{/admin.png}" alt="Profile">
+        </a>
+    </div>
+
     <!-- Modal -->
     <div id="profileModal" class="modal-qwr37">
         <div class="modal-content-kdx45">
             <span class="close-rpc29" onclick="closeProfileModal()">&times;</span>
-            <!-- <h2>User Profile</h2> -->
             <h2 id="username">Welcome! <span th:text="${#authentication.principal.getName()}"></span></h2>
             <button class="logout-button-pmc18" onclick="logout()">Logout</button>
         </div>

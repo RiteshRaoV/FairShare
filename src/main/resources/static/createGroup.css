@@ -216,3 +216,90 @@ select {
     color: #ccc; /* Adjust based on your design */
 }
 
+/* Responsive Styles */
+@media (max-width: 1024px) {
+    .form-side {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #groupName {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .create-button, .cancel-button {
+        margin-right: 0;
+        margin-bottom: 10px;
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1.5rem;
+    }
+
+    .form-side {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .create-button, .cancel-button {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+    
+    input, select, #groupName {
+        width: 100%;
+        max-width: none;
+    }
+
+    .participant {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .participant input {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .form-side {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .actions {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    input, select, #groupName {
+        width: 100%;
+        max-width: none;
+    }
+
+    .create-button, .cancel-button {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .participant {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .participant input {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+}

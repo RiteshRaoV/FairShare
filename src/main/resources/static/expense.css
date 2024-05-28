@@ -389,47 +389,119 @@ p{
     text-decoration: none;
 }
 
+
 /* Responsive Styles */
-@media (max-width: 768px) {
+
+/* Adjustments for screens smaller than 1200px */
+@media (max-width: 1200px) {
+    .mf-dashboard-container {
+        padding: 15px;
+    }
+
+    .mf-header h1 {
+        font-size: 1.8em;
+    }
+
+    .mf-nav-btn, .mf-nav-icon {
+        padding: 8px 15px;
+        font-size: 1em;
+    }
+}
+
+/* Adjustments for screens smaller than 992px */
+@media (max-width: 992px) {
     .mf-header {
         flex-direction: column;
         align-items: flex-start;
     }
 
     .mf-header h1 {
-        font-size: 1.5em;
+        font-size: 1.6em;
+        margin-bottom: 10px;
     }
 
     .mf-nav {
-        margin-top: 10px;
+        align-items: flex-start;
     }
 
-    .mf-nav-btn {
-        padding: 8px 16px;
-        font-size: 0.9em;
-    }
-
-    .mf-nav-icon {
+    .mf-nav-btn, .mf-nav-icon {
+        margin: 5px 0;
         padding: 8px 12px;
-        font-size: 1em;
-    }
-
-    .mf-create-expense-container .mf-form-row {
-        flex-direction: column;
-        padding: 15px;
-    }
-
-    .mf-create-expense-container .mf-form-column {
-        width: 100%;
-        margin-bottom: 20px;
+        font-size: 0.9em;
     }
 
     .mf-main-content {
         padding: 15px;
     }
 
-    .mf-search-bar input {
-        padding: 8px;
+    .mf-create-expense-container .mf-form-row {
+        flex-direction: column;
+    }
+
+    .mf-create-expense-container .mf-form-column {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+
+/* Adjustments for screens smaller than 768px */
+@media (max-width: 768px) {
+    .mf-dashboard-container {
+        padding: 10px;
+    }
+
+    .mf-header h1 {
+        font-size: 1.4em;
+    }
+
+    .mf-nav-btn, .mf-nav-icon {
+        padding: 6px 10px;
+        font-size: 0.8em;
+    }
+
+    .mf-main-content {
+        padding: 10px;
+    }
+
+    .mf-create-expense-container .mf-form-row {
+        padding: 20px;
+    }
+
+    .mf-create-expense-container .form-group button {
+        padding: 8px 16px;
+        margin-left: 0;
+    }
+}
+
+/* Adjustments for screens smaller than 576px */
+@media (max-width: 576px) {
+    .mf-dashboard-container {
+        padding: 5px;
+    }
+
+    .mf-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .mf-header h1 {
+        font-size: 1.2em;
+        margin-bottom: 10px;
+    }
+
+    .mf-nav {
+        align-items: flex-start;
+        margin-top: 70px;
+    }
+
+    .mf-nav-btn, .mf-nav-icon {
+        margin: 3px 0;
+        padding: 5px 8px;
+        font-size: 0.7em;
+    }
+
+    .mf-main-content {
+        padding: 5px;
     }
 
     .mf-expense-item {
@@ -437,15 +509,32 @@ p{
         align-items: flex-start;
     }
 
-    .mf-expense-item > * {
-        margin-bottom: 10px;
+    .mf-expense-info {
+        flex-direction: column;
+        align-items: flex-start;
     }
 
-    .mf-expense-name, .mf-expense-amount {
-        font-size: 1em;;
+    .mf-expense-icon {
+        font-size: 1.5em;
+        margin-bottom: 5px;
     }
 
-    .mf-expense-details, .mf-expense-date {
-        font-size: 0.8em;
+    .mf-expense-details, .mf-expense-amount, .mf-expense-date {
+        width: 100%;
+        text-align: left;
+    }
+
+    .mf-create-expense-container .mf-form-row {
+        padding: 15px;
+    }
+
+    .mf-create-expense-container .form-group button {
+        padding: 6px 12px;
+        margin-left: 0;
+    }
+
+    .mf-paid-for-container ul li {
+        flex-direction: column;
+        align-items: flex-start;
     }
 }

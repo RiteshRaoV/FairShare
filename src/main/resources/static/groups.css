@@ -108,3 +108,67 @@ body {
 .group-delete-button:hover{
     transform: scale(1.3);
 }
+
+/* Responsive Styles */
+
+/* Adjustments for screens smaller than 1200px */
+@media (max-width: 1200px) {
+    .main-container {
+        margin-top: 80px;
+        margin-left: 100px;
+        margin-right: 100px;
+    }
+}
+
+/* Adjustments for screens smaller than 992px */
+@media (max-width: 992px) {
+    .main-container {
+        margin-top: 80px;
+        margin-left: 50px;
+        margin-right: 50px;
+    }
+}
+
+/* Adjustments for screens smaller than 768px */
+@media (max-width: 768px) {
+    .main-container {
+        margin-top: 80px;
+        padding: 0 10px;
+    }
+
+    .group-card {
+        padding: 10px;
+    }
+
+    .group-name {
+        font-size: 18px;
+    }
+
+    .group-date, .group-size, .group-delete {
+        font-size: 12px;
+    }
+}
+
+/* Adjustments for screens smaller than 576px */
+@media (max-width: 576px) {
+    .groups-container {
+        grid-template-columns: 1fr; /* One column layout for very small screens */
+    }
+
+    .main-container {
+        margin-top: 80px;
+        padding: 0 5px;
+    }
+
+    .group-card {
+        padding: 8px;
+    }
+
+    .group-name {
+        font-size: 16px;
+    }
+
+    .group-date, .group-size, .group-delete {
+        font-size: 10px;
+    }
+}
