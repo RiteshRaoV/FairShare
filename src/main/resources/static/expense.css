@@ -371,7 +371,12 @@
     margin-left: -700px;
     font-size: 14px;
     font-weight: 600;
+    display: none;
 }
+
+/* .mf-details{
+    max-width: 100px;
+} */
 input{
     height: 50px;
 }

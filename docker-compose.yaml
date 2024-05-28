@@ -5,40 +5,34 @@ services:
     image: mysql:8.0
     container_name: mysql
     environment:
-      MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: FairShare
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
     ports:
       - "3306:3306"
     volumes:
       - mysql-data:/var/lib/mysql
-    networks:
-      - app-network
+    restart: always
 
   app:
-    image: your-app-image-name
+    build: .
     container_name: splitwise-app
-    build:
-      context: .
-      dockerfile: Dockerfile
+    ports:
+      - "1111:1111"
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/FairShare?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&createDatabaseIfNotExist=true
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.MySQL8Dialect
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SERVER_PORT: 1111
       APPLICATION_BASE_URL: http://localhost:1111
       SPRINGDOC_API_DOCS_PATH: /api-docs
-      SPRING_THYMELEAF_EXTRAS_SPRINGSECURITY5_ENABLED: "true"
-    ports:
-      - "1111:1111"
+      SPRING_THYMELEAF_EXTRAS_SPRINGSECURITY5_ENABLED: true
     depends_on:
       - mysql
-    networks:
-      - app-network
+    restart: always
+
 
 volumes:
   mysql-data:
-
-networks:
-  app-network:

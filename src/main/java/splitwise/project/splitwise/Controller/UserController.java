@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.servlet.http.HttpSession;
 import splitwise.project.splitwise.DTO.UserRegistrationDTO;
 import splitwise.project.splitwise.Model.User;
 import splitwise.project.splitwise.Services.UserService;
@@ -23,12 +24,20 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/sign-up")
-    public String addUser(@ModelAttribute UserRegistrationDTO user) {
+    public String addUser(@ModelAttribute UserRegistrationDTO user,HttpSession session) {
+        session.removeAttribute("msg");
         if (userService.existsByEmail(user.getEmail())) {
-            return "Auth/sign-up";
+            session.setAttribute("msg", "User with this email already exists.");
+            return "redirect:/user/sign-up";
         } else {
-            User newUser = userService.addUser(user);
-            return "redirect:/user/sign-in";
+            User savedUser = userService.addUser(user);
+            if (savedUser != null) {
+                session.setAttribute("msg", "Registered successfully.");
+                return "redirect:/user/sign-in";
+            } else {
+                session.setAttribute("msg", "Something went wrong on the server.");
+                return "redirect:/user/sign-up";
+            }
         }
     }
 

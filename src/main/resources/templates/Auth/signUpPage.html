@@ -9,6 +9,7 @@
 <body>
     <div class="login-card">
         <h2 class="login-title">Welcome to FairShare</h2>
+        <p th:if="${session.msg}" class="text-center text-success fs-4" th:text="${session.msg}" style="padding: 20px;"></p>
         <form th:action="@{/user/sign-up}" method="post" onsubmit="return validateForm()">
             <input class="text-input" name="firstName" placeholder="First Name" type="text" required>
             <input class="text-input" name="lastName" placeholder="Last Name" type="text" required>
@@ -20,9 +21,9 @@
         </form>
         
         <div class="login-footer">
-            <a th:href="@{/forgot-password}" class="forgot-password">Forgot Password?</a>
-            <span> | </span>
-            <a th:href="@{/user/sign-in}" class="sign-up">Sign in</a>
+            <!-- <a th:href="@{/forgot-password}" class="forgot-password">Forgot Password?</a>
+            <span> | </span> -->
+            <a th:href="@{/user/sign-in}" class="sign-up">registered already ? Sign in</a>
         </div>
     </div>
 </body>

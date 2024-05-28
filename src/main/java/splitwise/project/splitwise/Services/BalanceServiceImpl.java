@@ -1,5 +1,7 @@
 package splitwise.project.splitwise.Services;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -54,55 +56,65 @@ public class BalanceServiceImpl implements BalanceService {
         return balances;
     }
 
-    @Override
-    public List<Map<String, Object>> settleDebts(Long groupId) {
-        Map<String, Double> balances = calculateBalances(groupId);
-        List<Map<String, Object>> transactions = new ArrayList<>();
+   @Override
+public List<Map<String, Object>> settleDebts(Long groupId) {
+    Map<String, Double> balances = calculateBalances(groupId);
+    List<Map<String, Object>> transactions = new ArrayList<>();
 
-        // Separate creditors and debtors
-        List<Map.Entry<String, Double>> creditors = new ArrayList<>();
-        List<Map.Entry<String, Double>> debtors = new ArrayList<>();
+    // Separate creditors and debtors
+    List<Map.Entry<String, Double>> creditors = new ArrayList<>();
+    List<Map.Entry<String, Double>> debtors = new ArrayList<>();
 
-        for (Map.Entry<String, Double> entry : balances.entrySet()) {
-            if (entry.getValue() > 0) {
-                creditors.add(entry);
-            } else if (entry.getValue() < 0) {
-                debtors.add(entry);
-            }
+    for (Map.Entry<String, Double> entry : balances.entrySet()) {
+        if (entry.getValue() > 0) {
+            creditors.add(entry);
+        } else if (entry.getValue() < 0) {
+            debtors.add(entry);
         }
-
-        creditors.sort(Map.Entry.comparingByValue());
-        debtors.sort(Map.Entry.comparingByValue());
-
-        while (!creditors.isEmpty() && !debtors.isEmpty()) {
-            Map.Entry<String, Double> creditor = creditors.remove(creditors.size() - 1);
-            Map.Entry<String, Double> debtor = debtors.remove(debtors.size() - 1);
-
-            double settledAmount = Math.min(creditor.getValue(), -debtor.getValue());
-
-            Map<String, Object> transaction = new HashMap<>();
-            transaction.put("from", debtor.getKey());
-            transaction.put("to", creditor.getKey());
-            transaction.put("amount", settledAmount);
-
-            transactions.add(transaction);
-
-            creditor.setValue(creditor.getValue() - settledAmount);
-            debtor.setValue(debtor.getValue() + settledAmount);
-
-            if (creditor.getValue() > 0) {
-                creditors.add(creditor);
-            }
-            if (debtor.getValue() < 0) {
-                debtors.add(debtor);
-            }
-        }
-        List<Expense> expenses = expenseRepository.findByGroup_GroupId(groupId);
-        Group group = groupRepository.findByGroupId(groupId);
-        group.setEndDate(LocalDate.now());
-        group.setTotalExpense(expenses.stream().mapToDouble(Expense::getAmount).sum());
-        groupRepository.save(group);
-        return transactions;
     }
+
+    creditors.sort(Map.Entry.comparingByValue());
+    debtors.sort(Map.Entry.comparingByValue());
+
+    while (!creditors.isEmpty() && !debtors.isEmpty()) {
+        Map.Entry<String, Double> creditor = creditors.remove(creditors.size() - 1);
+        Map.Entry<String, Double> debtor = debtors.remove(debtors.size() - 1);
+
+        BigDecimal creditorValue = BigDecimal.valueOf(creditor.getValue()).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal debtorValue = BigDecimal.valueOf(debtor.getValue()).setScale(2, RoundingMode.HALF_UP);
+
+        BigDecimal settledAmount = creditorValue.min(debtorValue.negate());
+
+        Map<String, Object> transaction = new HashMap<>();
+        transaction.put("from", debtor.getKey());
+        transaction.put("to", creditor.getKey());
+        transaction.put("amount", settledAmount.setScale(2, RoundingMode.HALF_UP).doubleValue());
+
+        transactions.add(transaction);
+
+        creditorValue = creditorValue.subtract(settledAmount).setScale(2, RoundingMode.HALF_UP);
+        debtorValue = debtorValue.add(settledAmount).setScale(2, RoundingMode.HALF_UP);
+
+        if (creditorValue.compareTo(BigDecimal.ZERO) > 0) {
+            creditor.setValue(creditorValue.doubleValue());
+            creditors.add(creditor);
+        }
+        if (debtorValue.compareTo(BigDecimal.ZERO) < 0) {
+            debtor.setValue(debtorValue.doubleValue());
+            debtors.add(debtor);
+        }
+    }
+
+    List<Expense> expenses = expenseRepository.findByGroup_GroupId(groupId);
+    Group group = groupRepository.findByGroupId(groupId);
+    group.setEndDate(LocalDate.now());
+    group.setTotalExpense(expenses.stream()
+        .mapToDouble(Expense::getAmount)
+        .map(amount -> BigDecimal.valueOf(amount).setScale(2, RoundingMode.HALF_UP).doubleValue())
+        .sum());
+    groupRepository.save(group);
+
+    return transactions;
+}
 
 }

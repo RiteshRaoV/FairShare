@@ -9,14 +9,15 @@
 <body>
     <div class="login-card">
         <h2 class="login-title">Welcome to FairShare</h2>
+        <p th:if="${param.error}" class="text-center text-danger fs-5"
+        th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message}" style="padding: 10px;"></p>
+      <p th:text="${session.verificationMessage}" style="padding: 10px;"></p>
         <form th:action="@{/userLogin}" method="post">
             <input class="email" name="username" placeholder="Email" type="email" required>
             <input class="password" name="password" placeholder="Password" type="password" required>
             <button type="submit" class="login-button">Login</button>
         </form>
         <div class="login-footer">
-            <a th:href="@{/forgot-password}" class="forgot-password">Forgot Password?</a>
-            <span> | </span>
             <a th:href="@{/user/sign-up}" class="sign-up">Sign Up</a>
         </div>
     </div>
