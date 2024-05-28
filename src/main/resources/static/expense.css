@@ -425,7 +425,7 @@ p{
     }
 
     .mf-nav-btn, .mf-nav-icon {
-        margin: 5px 0;
+        margin: 5px;
         padding: 8px 12px;
         font-size: 0.9em;
     }
@@ -457,6 +457,7 @@ p{
     .mf-nav-btn, .mf-nav-icon {
         padding: 6px 10px;
         font-size: 0.8em;
+        margin: 5px;
     }
 
     .mf-main-content {
@@ -495,7 +496,7 @@ p{
     }
 
     .mf-nav-btn, .mf-nav-icon {
-        margin: 3px 0;
+        margin: 3px;
         padding: 5px 8px;
         font-size: 0.7em;
     }
