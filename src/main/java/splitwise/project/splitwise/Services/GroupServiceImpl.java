@@ -25,6 +25,7 @@ public class GroupServiceImpl implements GroupService {
     private UserRepository userRepository;
     @Autowired
     private ExpenseRepository expenseRepository;
+
     @Override
     public List<User> getAllGroupMembers(long groupId) {
         Group group = groupRepository.findById(groupId).get();
@@ -66,7 +67,7 @@ public class GroupServiceImpl implements GroupService {
     public Group addUsersToGroup(long groupId, List<Long> userIds) {
         Group group = groupRepository.findById(groupId).get();
         List<User> groupUsers = group.getGroupMembers();
-        List<User> users=userRepository.findAllByUserIds(userIds);
+        List<User> users = userRepository.findAllByUserIds(userIds);
         groupUsers.addAll(users);
         group.setGroupMembers(groupUsers);
         groupRepository.save(group);
@@ -93,9 +94,9 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public Group createGroup(GroupDTO groupDTO) {
-        List<Long> userIds=groupDTO.getParticipants();
+        List<Long> userIds = groupDTO.getParticipants();
 
-        Group newGroup=new Group();
+        Group newGroup = new Group();
         newGroup.setGroupName(groupDTO.getGroupName());
         newGroup.setGroupMembers(userRepository.findAllByUserIds(userIds));
         newGroup.setCurrency(groupDTO.getCurrency());
@@ -114,12 +115,11 @@ public class GroupServiceImpl implements GroupService {
         if (optionalGroup.isPresent()) {
             Group group = optionalGroup.get();
 
-            // Remove group association from expenses
+            // Delete group expenses
             List<Expense> groupExpenses = group.getExpenses();
             if (groupExpenses != null && !groupExpenses.isEmpty()) {
                 for (Expense expense : groupExpenses) {
-                    expense.setGroup(null);
-                    expenseRepository.save(expense);
+                    expenseRepository.delete(expense);
                 }
             }
 
@@ -137,5 +137,6 @@ public class GroupServiceImpl implements GroupService {
         } else {
             throw new IllegalArgumentException("Group not found with id: " + groupId);
         }
-    }   
+    }
+
 }

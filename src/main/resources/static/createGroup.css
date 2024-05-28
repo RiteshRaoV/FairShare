@@ -34,6 +34,7 @@ main {
     flex-direction: column;
     align-items: center;
     gap: 2rem; /* Add gap between the containers */
+    margin-top: 60px;
 }
 
 h2 {

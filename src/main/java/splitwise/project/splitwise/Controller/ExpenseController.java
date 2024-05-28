@@ -55,7 +55,6 @@ public class ExpenseController {
         model.addAttribute("totalGroupSpending", totalGroupSpending);
         model.addAttribute("balances", balances);
         model.addAttribute("reimbursements", reimbursements);
-
         return "Home/expense";
     }
 
