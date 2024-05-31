@@ -1,13 +1,11 @@
 let participants = [];
 
 function searchParticipants() {
-  console.log("called!!");
   let input = document.getElementById("participantSearch").value.toLowerCase();
   let searchResults = document.getElementById("searchResults"); // Changed the ID to avoid duplication
   searchResults.innerHTML = "";
 
   if (input.length > 0) {
-    console.log(users);
     users
       .filter((user) => user.email.toLowerCase().includes(input))
       .forEach((user) => {
@@ -21,10 +19,11 @@ function searchParticipants() {
     searchResults.style.display = "none";
   }
 }
-const body=document.getElementById('body')
-body.addEventListener('click',()=>{
-  searchResults.style.display='none';
-})
+const body = document.getElementById("body");
+body.addEventListener("click", () => {
+  searchResults.style.display = "none";
+});
+
 function addParticipant(user) {
   if (!participants.includes(user.userId)) {
     document.getElementById("participantSearch").value = "";
@@ -91,10 +90,8 @@ function createGroup() {
         return response.json();
       })
       .then((data) => {
-        // Handle success response from server
-        console.log("Group created successfully:", data);
         alert("Group created successfully");
-        window.location.href = "/group" // Redirect to the group's details page
+        window.location.href = "/group"; // Redirect to the group's details page
       })
       .catch((error) => {
         // Handle error
@@ -106,6 +103,43 @@ function createGroup() {
   }
 }
 
+function updateGroup(groupId) {
+  let groupName = document.getElementById("groupName").value;
+  let updateGroupDTO = {
+    groupId: groupId,
+    groupName: groupName,
+    participants: participants, // Assuming participants is defined elsewhere
+  };
+  if (updateGroupDTO.groupName != "") {
+    fetch("http://localhost:1111/group/update", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // Add any additional headers if needed
+      },
+      body: JSON.stringify(updateGroupDTO),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // Handle success response from server
+        console.log("Group updated successfully:", data);
+        alert("Group updated successfully");
+        window.location.href = "/expenses/group/" + groupId;
+      })
+      .catch((error) => {
+        // Handle error
+        console.error("There was a problem updating the group:", error);
+        alert("There was a problem updating the group.");
+      });
+  } else {
+    alert("enter a group name");
+  }
+}
 
 function removeParticipant(button) {
   const participantDiv = button.parentElement;
@@ -125,5 +159,3 @@ function clearParticipants() {
   document.getElementById("searchResults").style.display = "none";
   document.getElementById("groupName").value = "";
 }
-
-

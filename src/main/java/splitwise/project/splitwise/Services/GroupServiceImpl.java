@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
 import splitwise.project.splitwise.DTO.GroupDTO;
+import splitwise.project.splitwise.DTO.UpdateGroupDTO;
 import splitwise.project.splitwise.Model.Expense;
 import splitwise.project.splitwise.Model.Group;
 import splitwise.project.splitwise.Model.User;
@@ -137,6 +138,17 @@ public class GroupServiceImpl implements GroupService {
         } else {
             throw new IllegalArgumentException("Group not found with id: " + groupId);
         }
+    }
+
+    @Override
+    public Group updateGroup(UpdateGroupDTO updateGroupDTO){
+        Group group = groupRepository.findByGroupId(updateGroupDTO.getGroupId());
+        group.setGroupName(updateGroupDTO.getGroupName());
+        List<User> users = userRepository.findAllByUserIds(updateGroupDTO.getParticipants());
+        List<User> existingUsers = getAllGroupMembers(updateGroupDTO.getGroupId());
+        users.removeAll(existingUsers);
+        group.getGroupMembers().addAll(users);
+        return groupRepository.save(group);
     }
 
 }

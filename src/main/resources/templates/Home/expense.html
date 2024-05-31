@@ -259,7 +259,7 @@
                     type="checkbox"
                     th:field="*{expensePayedToIds}"
                     th:value="${member.userId}"
-                    th:id="${'member_' + member.userId}"
+                    th:id="${'member_' + member.userId}" style="width: auto;"
                   />
                   <label th:for="${'member_' + member.userId}">
                     <span th:text="${member.firstName}"></span>
@@ -353,50 +353,22 @@
                       type="text"
                       id="groupName"
                       placeholder="Enter a name for your group"
-                      required
+                      required 
+                      th:value="${group.groupName}"
                     />
                     <small>give a name for your group.</small>
                   </div>
                   <div class="form-group">
                     <label for="currencySymbol">Currency</label>
-                    <select id="currencySymbol" required>
-                      <option value="₹">₹ - INR</option>
-                      <option value="$">$ - USD</option>
-                      <option value="€">€ - EUR</option>
-                      <option value="£">£ - GBP</option>
-                      <option value="¥">¥ - JPY</option>
-                      <option value="₽">₽ - RUB</option>
-                      <option value="₩">₩ - KRW</option>
-                      <option value="฿">฿ - THB</option>
-                      <option value="₺">₺ - TRY</option>
-                      <option value="₴">₴ - UAH</option>
-                      <option value="₮">₮ - MNT</option>
-                      <option value="₦">₦ - NGN</option>
-                      <option value="R$">R$ - BRL</option>
-                      <option value="₡">₡ - CRC</option>
-                      <option value="₪">₪ - ILS</option>
-                      
+                    <select id="currencySymbol" required disabled>
+                      <option th:text="${currency}"></option>
                     </select>
                     <small>We’ll use it to display amounts.</small>
                   </div>
                   <div class="form-group">
                     <label for="groupType">Type</label>
-                    <select id="groupType" required>
-                      <option value="business">Business</option>
-                      <option value="vacation">Vacation</option>
-                      <option value="meeting">Meeting</option>
-                      <option value="family">Family</option>
-                      <option value="shopping">Shopping</option>
-                      <option value="party">Party</option>
-                      <option value="study">Study</option>
-                      <option value="project">Project</option>
-                      <option value="training">Training</option>
-                      <option value="birthday">Birthday</option>
-                      <option value="wedding">Wedding</option>
-                      <option value="holiday">Holiday</option>
-                      <option value="conference">Conference</option>
-                      <option value="outing">Outing</option>
-                      <option value="reunion">Reunion</option>                  
+                    <select id="groupType" required disabled>
+                      <option th:text="${group.groupType}"></option>                 
                     </select>
                     <small>We’ll use it to classify group.</small>
                   </div>
@@ -422,11 +394,17 @@
                     <select id="searchResults" class="search-results" size="3" onchange="selectParticipant(this)" style="height: fit-content;margin-top: -8px; margin-left: 10px; width: fit-content; display: none; "></select>
                 </div>
                 <div id="participantsList">
+                <div th:each="member : ${group.groupMembers}" class="participant">
+                  <input type="text" placeholder="Participant Name" th:value="${member.firstName}">
+                  <button class="remove-participant" onclick="removeParticipant(this)">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                </div>
               </div>
             </div>
             <div class="actions">
-              <button class="create-button" onclick="createGroup()">
-                <i class="fas fa-save"></i> Create
+              <button class="create-button" th:onclick="'updateGroup(' + ${group.groupId} + ')'">
+              <i class="fas fa-save"></i> Update
               </button>
               <button class="cancel-button" onclick="clearParticipants()">
                 <i class="fas fa-times"></i> Cancel

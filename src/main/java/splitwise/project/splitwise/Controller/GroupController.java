@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import splitwise.project.splitwise.DTO.GroupDTO;
+import splitwise.project.splitwise.DTO.UpdateGroupDTO;
 import splitwise.project.splitwise.Model.Group;
 import splitwise.project.splitwise.Model.User;
 import splitwise.project.splitwise.Services.GroupService;
@@ -41,6 +42,12 @@ public class GroupController {
     public ResponseEntity<List<User>> addUsersToGroup(@PathVariable long groupId,@RequestBody List<Long> userIds){
         Group group=groupService.addUsersToGroup(groupId, userIds);
         return ResponseEntity.ok(group.getGroupMembers());
+    }
+
+    @PostMapping("/update")
+    public ResponseEntity<Group> updateGroup(@RequestBody UpdateGroupDTO UpdateGroupDTO){
+        Group updatedGroup = groupService.updateGroup(UpdateGroupDTO);
+        return ResponseEntity.ok(updatedGroup);
     }
 
     @GetMapping("/create")

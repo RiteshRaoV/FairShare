@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import splitwise.project.splitwise.DTO.ExpenseDTO;
 import splitwise.project.splitwise.Model.Expense;
+import splitwise.project.splitwise.Model.Group;
 import splitwise.project.splitwise.Model.User;
 import splitwise.project.splitwise.Services.BalanceService;
 import splitwise.project.splitwise.Services.ExpenseService;
@@ -52,7 +53,10 @@ public class ExpenseController {
         Map<String, Double> balances = balanceService.calculateBalances(groupId);
         List<Map<String, Object>> reimbursements = balanceService.settleDebts(groupId);
         List<User> users = userService.getAllUser();
+        List<User> existingUsers = groupService.getAllGroupMembers(groupId);
+        users.removeAll(existingUsers);
         String currency = groupService.getGroup(groupId).getCurrency();
+        Group group = groupService.getGroup(groupId);
         model.addAttribute("groupMembers", groupMembers);
         model.addAttribute("expenseDTO", new ExpenseDTO());
         model.addAttribute("expenses", expenses);
@@ -61,6 +65,7 @@ public class ExpenseController {
         model.addAttribute("balances", balances);
         model.addAttribute("reimbursements", reimbursements);
         model.addAttribute("users", users);
+        model.addAttribute("group", group);
         return "Home/expense";
     }
 

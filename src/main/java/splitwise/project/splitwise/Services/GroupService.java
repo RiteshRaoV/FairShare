@@ -3,6 +3,7 @@ package splitwise.project.splitwise.Services;
 import java.util.List;
 
 import splitwise.project.splitwise.DTO.GroupDTO;
+import splitwise.project.splitwise.DTO.UpdateGroupDTO;
 import splitwise.project.splitwise.Model.Group;
 import splitwise.project.splitwise.Model.User;
 
@@ -28,5 +29,7 @@ public interface GroupService {
     void deleteGroup(Long groupId);
 
     Group createGroup(GroupDTO groupDTO);
+
+    Group updateGroup(UpdateGroupDTO updateGroupDTO);
 
 }
