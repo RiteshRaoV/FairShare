@@ -64,7 +64,7 @@
           }
           alert("Group deleted successfully");
           // Reload the page after deletion
-          location.reload();
+          window.location.href = "/group";
         })
         .catch((error) => {
           console.error("There was a problem deleting the group:", error);
@@ -72,6 +72,7 @@
     }
   }
   function redirectToExpensePage(groupId) {
+    location.reload();
     window.location.href = "/expenses/group/" + groupId;
   }
 </script>

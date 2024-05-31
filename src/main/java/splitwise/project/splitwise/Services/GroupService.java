@@ -16,6 +16,8 @@ public interface GroupService {
 
     List<Group> getAllGroupOfUser(String email);
 
+    boolean checkIfUserExistsInGroup(long groupId,String email);
+
     long getGroupSize(long groupId);
 
     Group addUserToGroup(long groupId, User user);

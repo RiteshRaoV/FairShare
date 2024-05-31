@@ -151,4 +151,15 @@ public class GroupServiceImpl implements GroupService {
         return groupRepository.save(group);
     }
 
+    @Override
+    public boolean checkIfUserExistsInGroup(long groupId, String email) {
+        User user = userRepository.findByEmail(email);
+        List<Group> groups = groupRepository.findByGroupMembersUserId(user.getUserId());
+        if(groups.contains(user)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 }

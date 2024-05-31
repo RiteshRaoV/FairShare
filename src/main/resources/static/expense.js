@@ -94,3 +94,26 @@ function markAsPaid(event) {
   reimbursement.style.display = "none";
   alert("Marked as paid");
 }
+
+function deleteExpense(expenseId){
+      // Confirm before deleting
+      if (confirm("Are you sure you want to delete this expense?")) {
+        fetch(`http://localhost:1111/expenses/delete-expense/${expenseId}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            alert("expense deleted successfully");
+            // Reload the page after deletion
+            location.reload();
+          })
+          .catch((error) => {
+            console.error("There was a problem deleting the expense:", error);
+          });
+      }
+}

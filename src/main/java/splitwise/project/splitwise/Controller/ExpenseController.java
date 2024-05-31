@@ -1,5 +1,6 @@
 package splitwise.project.splitwise.Controller;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,27 +48,33 @@ public class ExpenseController {
     }
 
     @GetMapping("/group/{groupId}")
-    public String expenses(@PathVariable Long groupId,Model model){
-        List<Expense> expenses = expenseService.getAllExpenseOfGroup(groupId);
-        List<User> groupMembers = groupService.getAllGroupMembers(groupId);
-        double totalGroupSpending = expenseService.getTotalGroupExpense(groupId);
-        Map<String, Double> balances = balanceService.calculateBalances(groupId);
-        List<Map<String, Object>> reimbursements = balanceService.settleDebts(groupId);
-        List<User> users = userService.getAllUser();
-        List<User> existingUsers = groupService.getAllGroupMembers(groupId);
-        users.removeAll(existingUsers);
-        String currency = groupService.getGroup(groupId).getCurrency();
-        Group group = groupService.getGroup(groupId);
-        model.addAttribute("groupMembers", groupMembers);
-        model.addAttribute("expenseDTO", new ExpenseDTO());
-        model.addAttribute("expenses", expenses);
-        model.addAttribute("currency", currency);
-        model.addAttribute("totalGroupSpending", totalGroupSpending);
-        model.addAttribute("balances", balances);
-        model.addAttribute("reimbursements", reimbursements);
-        model.addAttribute("users", users);
-        model.addAttribute("group", group);
-        return "Home/expense";
+    public String expenses(@PathVariable Long groupId,Model model,Principal principal){
+            List<Expense> expenses = expenseService.getAllExpenseOfGroup(groupId);
+            List<User> groupMembers = groupService.getAllGroupMembers(groupId);
+            double totalGroupSpending = expenseService.getTotalGroupExpense(groupId);
+            Map<String, Double> balances = balanceService.calculateBalances(groupId);
+            List<Map<String, Object>> reimbursements = balanceService.settleDebts(groupId);
+            List<User> users = userService.getAllUser();
+            List<User> existingUsers = groupService.getAllGroupMembers(groupId);
+            users.removeAll(existingUsers);
+            String currency = groupService.getGroup(groupId).getCurrency();
+            Group group = groupService.getGroup(groupId);
+            model.addAttribute("groupMembers", groupMembers);
+            model.addAttribute("expenseDTO", new ExpenseDTO());
+            model.addAttribute("expenses", expenses);
+            model.addAttribute("currency", currency);
+            model.addAttribute("totalGroupSpending", totalGroupSpending);
+            model.addAttribute("balances", balances);
+            model.addAttribute("reimbursements", reimbursements);
+            model.addAttribute("users", users);
+            model.addAttribute("group", group);
+            return "Home/expense";
+    }
+
+    @DeleteMapping("/delete-expense/{expenseId}")
+    public ResponseEntity<?> deleteExpense(@PathVariable Long expenseId){
+        expenseService.removeExpense(expenseId);
+        return ResponseEntity.ok("deleted successfully");
     }
 
 }

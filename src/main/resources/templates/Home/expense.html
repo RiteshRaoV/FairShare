@@ -40,7 +40,7 @@
             />
           </div>
           <div class="mf-expenses-list" id="expensesList">
-            <div th:each="expense : ${expenses}" class="mf-expense-item">
+            <div th:each="expense : ${expenses}" class="mf-expense-item" >
               <div class="mf-expense-info">
                 <div class="mf-expense-icon" th:switch="${expense.expenseType}">
                   <span th:case="'General'">
@@ -175,6 +175,9 @@
               <div class="mf-expense-date" th:text="${expense.expenseDate}">
                 Date
               </div>
+              <button th:onclick="'deleteExpense(' + ${expense.expenseId} + ')'" class="expense-delete-button">
+                <i class="fas fa-trash" ></i>
+              </button>
             </div>
           </div>
         </div>

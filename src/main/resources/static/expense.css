@@ -749,3 +749,16 @@ select {
   #searchResults option:hover {
     background-color: #f1f1f1;
   }
+
+  .expense-delete-button{
+    z-index: 50;
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.expense-delete-button:hover{
+    transform: scale(1.3);
+}
