@@ -1,16 +1,18 @@
 let participants = [];
 
 function searchParticipants() {
+  console.log("called!!");
   let input = document.getElementById("participantSearch").value.toLowerCase();
   let searchResults = document.getElementById("searchResults"); // Changed the ID to avoid duplication
   searchResults.innerHTML = "";
 
   if (input.length > 0) {
+    console.log(users);
     users
       .filter((user) => user.email.toLowerCase().includes(input))
       .forEach((user) => {
         let option = document.createElement("option");
-        option.textContent = `${user.firstName}-${user.email}`;
+        option.textContent = `${user.firstName} - ${user.email}`;
         option.onclick = () => addParticipant(user);
         searchResults.appendChild(option);
       });
@@ -19,7 +21,10 @@ function searchParticipants() {
     searchResults.style.display = "none";
   }
 }
-
+const body=document.getElementById('body')
+body.addEventListener('click',()=>{
+  searchResults.style.display='none';
+})
 function addParticipant(user) {
   if (!participants.includes(user.userId)) {
     document.getElementById("participantSearch").value = "";
@@ -120,3 +125,5 @@ function clearParticipants() {
   document.getElementById("searchResults").style.display = "none";
   document.getElementById("groupName").value = "";
 }
+
+

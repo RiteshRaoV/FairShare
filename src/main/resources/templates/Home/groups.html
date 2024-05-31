@@ -25,12 +25,13 @@
           th:onclick="'redirectToExpensePage(' + ${group.groupId} + ')'"
         >
           <div class="group-name" th:text="${group.groupName}"></div>
-          <div class="group-delete">
+          <div class="group-delete" >
             <button
+            
               class="group-delete-button"
               th:onclick="'deleteGroup(' + ${group.groupId} + ')'"
             >
-              <i class="fas fa-trash"></i>
+              <i class="fas fa-trash" ></i>
             </button>
           </div>
           <div

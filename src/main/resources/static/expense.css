@@ -539,3 +539,213 @@ p{
         align-items: flex-start;
     }
 }
+
+
+
+.container {
+    max-width: 700px;
+    width: 100%;
+    margin-left: 200px;
+}
+
+h2 {
+    color: #008080;
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.group-container, .participants-container {
+    width: 100%;
+    border: 1px solid #e0e0e0;
+    padding: 1.5rem;
+    border-radius: 10px;
+    background-color: #fafafa;
+    margin: 20px;
+}
+
+.form-side{
+    display: flex;
+    align-items: normal;
+    justify-content:space-evenly;
+
+}
+
+#groupName {
+    width: 100%; /* Ensure full width */
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+input {
+    width: 150px;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    margin-top: 10px;
+}
+#groupName{
+    width: 250px;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    margin-right: 20px;
+
+}
+select{
+    width: 100px;
+    height: 45px;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    margin-top: 10px;
+}
+
+small {
+    display: block;
+    color: #999;
+    width: fit-content;
+}
+
+select {
+    padding: 0.5rem;
+}
+
+.participants {
+    margin-top: 2rem;
+}
+
+.participant {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.participant input {
+    flex: 1;
+    margin-right: 0.5rem;
+}
+
+.remove-participant {
+    background: none;
+    border: none;
+    color: #e74c3c;
+    font-size: 1.25rem;
+    cursor: pointer;
+}
+
+.add-participant {
+    display: block;
+    background-color: #008080;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.add-participant i {
+    margin-right: 0.5rem;
+}
+
+.actions {
+    display: flex;
+    justify-content: left;
+    width: 100%;
+}
+
+.create-button, .cancel-button {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+.create-button {
+    background-color: #008080;
+    color: white;
+}
+
+.create-button i {
+    margin-right: 0.5rem;
+}
+
+.cancel-button {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.cancel-button i {
+    margin-right: 0.5rem;
+}
+
+.search-container {
+    position: relative;
+    display: inline-block;
+}
+
+.search-container input[type="text"] {
+    border-radius: 30px;
+    height: 30px;
+    padding-left: 30px; /* Make space for the icon */
+    padding-right: 10px;
+    box-sizing: border-box; /* Ensure padding is included in width */
+}
+
+.search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none; /* Allows clicks to pass through to the input */
+    font-size: 16px; /* Adjust based on your icon size */
+    color: #ccc; /* Adjust based on your design */
+}
+
+#participantSearch {
+    width: 300px;
+    padding: 20px;
+    padding-left: 30px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  #searchResults {
+    display: none; /* Initially hidden */
+    width: 320px; /* Slightly wider than the input */
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: absolute; /* To overlay below the input */
+    z-index: 1;
+  }
+  
+  #searchResults option {
+    padding: 8px;
+    cursor: pointer;
+  }
+  
+  #searchResults option:hover {
+    background-color: #f1f1f1;
+  }

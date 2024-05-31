@@ -19,6 +19,7 @@ import splitwise.project.splitwise.Model.User;
 import splitwise.project.splitwise.Services.BalanceService;
 import splitwise.project.splitwise.Services.ExpenseService;
 import splitwise.project.splitwise.Services.GroupService;
+import splitwise.project.splitwise.Services.UserService;
 
 @Controller
 @RequestMapping("/expenses")
@@ -32,6 +33,9 @@ public class ExpenseController {
 
     @Autowired
     private BalanceService balanceService;
+
+    @Autowired
+    private UserService userService;
 
     @PostMapping("/add-expense/{groupId}")
     public String addExpense(@ModelAttribute ExpenseDTO expenseDTO,@PathVariable long groupId){
@@ -47,6 +51,7 @@ public class ExpenseController {
         double totalGroupSpending = expenseService.getTotalGroupExpense(groupId);
         Map<String, Double> balances = balanceService.calculateBalances(groupId);
         List<Map<String, Object>> reimbursements = balanceService.settleDebts(groupId);
+        List<User> users = userService.getAllUser();
         String currency = groupService.getGroup(groupId).getCurrency();
         model.addAttribute("groupMembers", groupMembers);
         model.addAttribute("expenseDTO", new ExpenseDTO());
@@ -55,6 +60,7 @@ public class ExpenseController {
         model.addAttribute("totalGroupSpending", totalGroupSpending);
         model.addAttribute("balances", balances);
         model.addAttribute("reimbursements", reimbursements);
+        model.addAttribute("users", users);
         return "Home/expense";
     }
 

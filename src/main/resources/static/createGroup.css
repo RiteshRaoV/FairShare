@@ -303,3 +303,35 @@ select {
         margin-bottom: 10px;
     }
 }
+
+#participantSearch {
+    width: 300px;
+    padding: 20px;
+    padding-left: 30px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  #searchResults {
+    display: none; /* Initially hidden */
+    width: 320px; /* Slightly wider than the input */
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: absolute; /* To overlay below the input */
+    z-index: 1;
+  }
+  
+  #searchResults option {
+    padding: 8px;
+    cursor: pointer;
+  }
+  
+  #searchResults option:hover {
+    background-color: #f1f1f1;
+  }
