@@ -16,5 +16,6 @@ public class GroupDTO {
     private String groupName;
     private String currency;
     private String groupType;
+    private Long groupCreatorId;
     private List<Long> participants;
 }

@@ -25,13 +25,12 @@
           th:onclick="'redirectToExpensePage(' + ${group.groupId} + ')'"
         >
           <div class="group-name" th:text="${group.groupName}"></div>
-          <div class="group-delete" >
+          <div class="group-delete">
             <button
-            
               class="group-delete-button"
               th:onclick="'deleteGroup(' + ${group.groupId} + ')'"
             >
-              <i class="fas fa-trash" ></i>
+              <i class="fas fa-trash"></i>
             </button>
           </div>
           <div
@@ -60,11 +59,13 @@
       })
         .then((response) => {
           if (!response.ok) {
-            throw new Error("Network response was not ok");
+            alert("Unauthorised");
+            window.location.href = "/group";
+          } else {
+            alert("Group deleted successfully");
+            // Reload the page after deletion
+            window.location.href = "/group";
           }
-          alert("Group deleted successfully");
-          // Reload the page after deletion
-          window.location.href = "/group";
         })
         .catch((error) => {
           console.error("There was a problem deleting the group:", error);

@@ -31,7 +31,7 @@ public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long groupId;
-
+    private Long groupCreatorId;
     private String groupName;
     private String groupType;
     private String currency;

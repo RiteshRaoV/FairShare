@@ -103,6 +103,7 @@ public class GroupServiceImpl implements GroupService {
         newGroup.setCurrency(groupDTO.getCurrency());
         newGroup.setGroupType(groupDTO.getGroupType());
         newGroup.setStartDate(LocalDate.now());
+        newGroup.setGroupCreatorId(groupDTO.getGroupCreatorId());
         newGroup.setTotalExpense(0.0);
         return groupRepository.save(newGroup);
 

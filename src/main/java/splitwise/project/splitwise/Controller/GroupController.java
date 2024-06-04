@@ -33,6 +33,7 @@ public class GroupController {
     @PostMapping("/create")
     public ResponseEntity<Group> createGroup(@RequestBody GroupDTO groupDTO,Principal principal){
         groupDTO.getParticipants().add(userService.getUserIdByEmail(principal.getName()));
+        groupDTO.setGroupCreatorId(userService.getUserIdByEmail(principal.getName()));
         Group group=groupService.createGroup(groupDTO);
         if(group!=null){
             return ResponseEntity.ok(group);
@@ -65,9 +66,14 @@ public class GroupController {
     }
 
     @DeleteMapping("/delete/{groupId}")
-    public ResponseEntity<String> deleteGroup(@PathVariable Long groupId){
-        groupService.deleteGroup(groupId);
-        return ResponseEntity.ok().body("deleted successfully");
+    public ResponseEntity<String> deleteGroup(@PathVariable Long groupId,Principal principal){
+        if (groupService.getGroup(groupId).getGroupCreatorId().equals(userService.getUserIdByEmail(principal.getName()))) {
+            groupService.deleteGroup(groupId);
+            return ResponseEntity.ok().body("deleted successfully");
+        }else{
+            return ResponseEntity.badRequest().body("unauthrised");
+        }
+
     }
 
     @GetMapping("/members/{groupId}")
