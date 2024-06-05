@@ -15,12 +15,11 @@ balanceBtn.addEventListener("click", () => {
   addExpenseContainer.style.display = "none";
   groupContainer.style.display = "none";
   statsContainer.style.display = "none";
-  console.log("Active")
+  console.log("Active");
   balanceBtn.classList.add("active");
   expenseBtn.classList.remove("active");
   statsBtn.classList.remove("active");
   settingsBtn.classList.remove("active");
-  
 });
 expenseBtn.addEventListener("click", () => {
   expenseContainer.style.display = "block";
@@ -89,31 +88,64 @@ function filterExpenses() {
 
 function markAsPaid(event) {
   event.preventDefault();
+
   const link = event.target;
-  const reimbursement = link.closest(".reimbursement");
-  reimbursement.style.display = "none";
-  alert("Marked as paid");
+  const expenseDTO = {
+    expenseName: "Reimbursement", // or set dynamically if needed
+    expenseType: "Reimbursement", // or set dynamically if needed
+    currency: link.getAttribute("data-currency"),
+    amount: parseFloat(link.getAttribute("data-amount")),
+    expenseDate: new Date().toISOString().split("T")[0], // Current date
+    expensePayerId: parseFloat(link.getAttribute("data-expense-payer-id")),
+    expensePayedToIds: [
+      parseFloat(link.getAttribute("data-expense-payed-to-ids")),
+    ], // Constructing an array with a single element
+    groupId: parseFloat(link.getAttribute("data-group-id")),
+  };
+  fetch("/expenses/add-expense/" + expenseDTO.groupId, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(expenseDTO),
+  })
+    .then((response) => {
+      if (response.ok) {
+        // Request was successful (status code 2xx)
+        alert("Expense marked as paid successfully");
+        window.location.href =
+          "http://localhost:1111/expenses/group/" + expenseDTO.groupId; // Redirect to the group's details page
+      } else {
+        // Request failed (status code not 2xx)
+        alert("Failed to mark expense as paid");
+      }
+    })
+    .catch((error) => {
+      // Handle network error
+      console.error("Error:", error);
+      alert("An error occurred while marking the expense as paid");
+    });
 }
 
-function deleteExpense(expenseId){
-      // Confirm before deleting
-      if (confirm("Are you sure you want to delete this expense?")) {
-        fetch(`http://localhost:1111/expenses/delete-expense/${expenseId}`, {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error("Network response was not ok");
-            }
-            alert("expense deleted successfully");
-            // Reload the page after deletion
-            location.reload();
-          })
-          .catch((error) => {
-            console.error("There was a problem deleting the expense:", error);
-          });
-      }
+function deleteExpense(expenseId) {
+  // Confirm before deleting
+  if (confirm("Are you sure you want to delete this expense?")) {
+    fetch(`http://localhost:1111/expenses/delete-expense/${expenseId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        alert("expense deleted successfully");
+        // Reload the page after deletion
+        location.reload();
+      })
+      .catch((error) => {
+        console.error("There was a problem deleting the expense:", error);
+      });
+  }
 }

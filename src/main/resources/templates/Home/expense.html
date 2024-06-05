@@ -149,6 +149,9 @@
                       alt="3-star-hotel"
                     />
                   </span>
+                  <span th:case="'Reimbursement'">
+                    <img width="50" height="50" src="https://img.icons8.com/ios/50/refund.png" alt="refund"/>
+                  </span>
                 </div>
                 <div>
                   <div
@@ -248,6 +251,7 @@
                     id="expense-amount"
                     th:field="*{amount}"
                     value="0"
+                    step="0.01"
                     required
                   />
                 </div>
@@ -307,7 +311,7 @@
                 class="mf-balance"
                 th:class="${balance.value >= 0 ? 'mf-balance positive' : 'mf-balance negative'}"
               >
-                <span class="mf-name" th:text="${balance.key}"></span>
+                <span class="mf-name" th:text="${balance.key.firstName}"></span>
                 <span
                   class="mf-amount"
                   th:text="${currency + ' ' + balance.value}"
@@ -327,14 +331,18 @@
                 class="mf-reimbursement"
               >
                 <span class="mf-details">
-                  <b th:text="${reimbursement.from}"></b> owes
-                  <b th:text="${reimbursement.to}"></b>
+                  <b th:text="${reimbursement.from.firstName}"></b> owes
+                  <b th:text="${reimbursement.to.firstName}"></b>
                 </span>
-                <a
-                  href="#"
-                  class="mf-mark-paid"
-                  onclick="markAsPaid(event)"
-                >Mark as Paid</a>
+                <a href="#" class="mf-mark-paid"
+                th:data-from="${reimbursement.from.userId}"
+                th:data-to="${reimbursement.to.userId}"
+                th:data-currency="${currency}"
+                th:data-amount="${reimbursement.amount}"
+                th:data-expense-payer-id="${reimbursement.from.userId}"
+                th:data-expense-payed-to-ids="${reimbursement.to.userId}"
+                th:data-group-id="${groupId}"
+                onclick="markAsPaid(event)">Mark as Paid</a>             
                 <span
                   class="mf-amount"
                   th:text="${currency + ' ' + reimbursement.amount}"

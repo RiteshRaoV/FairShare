@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import splitwise.project.splitwise.Model.User;
 import splitwise.project.splitwise.Services.BalanceService;
 
 @RestController
@@ -18,7 +19,7 @@ public class BalanceController {
     private BalanceService balanceService;
 
     @GetMapping("/{groupId}")
-    public Map<String, Double> getBalances(@PathVariable Long groupId) {
+    public Map<User, Double> getBalances(@PathVariable Long groupId) {
         return balanceService.calculateBalances(groupId);
     }
 

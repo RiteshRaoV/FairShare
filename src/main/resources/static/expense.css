@@ -371,7 +371,6 @@
     margin-left: -700px;
     font-size: 14px;
     font-weight: 600;
-    display: none;
 }
 
 /* .mf-details{
@@ -442,6 +441,9 @@ p{
         width: 100%;
         margin-bottom: 20px;
     }
+    .mf-mark-paid{
+        margin-left: 30px;
+    }
 }
 
 /* Adjustments for screens smaller than 768px */
@@ -471,6 +473,9 @@ p{
     .mf-create-expense-container .form-group button {
         padding: 8px 16px;
         margin-left: 0;
+    }
+    .mf-mark-paid{
+        margin-left: 30px;
     }
 }
 
