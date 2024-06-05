@@ -102,7 +102,7 @@ function markAsPaid(event) {
     ], // Constructing an array with a single element
     groupId: parseFloat(link.getAttribute("data-group-id")),
   };
-  fetch("/expenses/add-expense/" + expenseDTO.groupId, {
+  fetch("/expenses/add-reimbersement/" + expenseDTO.groupId, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -149,3 +149,4 @@ function deleteExpense(expenseId) {
       });
   }
 }
+

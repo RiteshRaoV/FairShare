@@ -110,6 +110,7 @@ function updateGroup(groupId) {
     groupName: groupName,
     participants: participants, // Assuming participants is defined elsewhere
   };
+  console.log(JSON.stringify(updateGroupDTO))
   if (updateGroupDTO.groupName != "") {
     fetch("http://localhost:1111/group/update", {
       method: "POST",
