@@ -1,6 +1,3 @@
-Great! Including Docker configuration in your README is essential for helping users and developers quickly get your application up and running. Here is an updated README file that includes instructions for using Docker and Docker Compose:
-
----
 
 # FairShare
 
