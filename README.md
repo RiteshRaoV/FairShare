@@ -88,7 +88,7 @@ The balances feature allows users to view:
 ### Steps
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/fairshare.git
+   git clone https://github.com/RiteshRaoV/fairshare.git
    cd fairshare
    ```
 
