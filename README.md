@@ -34,7 +34,7 @@ FairShare is a web application designed to help users manage group expenses easi
 ### Steps
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/fairshare.git
+   git clone https://github.com/RiteshRaoV/fairshare.git
    cd fairshare
    ```
 
