@@ -106,14 +106,14 @@ public class BalanceServiceImpl implements BalanceService {
             }
         }
     
-        List<Expense> expenses = expenseRepository.findByGroup_GroupId(groupId);
-        Group group = groupRepository.findByGroupId(groupId);
-        group.setEndDate(LocalDate.now());
-        group.setTotalExpense(expenses.stream()
-            .mapToDouble(Expense::getAmount)
-            .map(amount -> BigDecimal.valueOf(amount).setScale(2, RoundingMode.HALF_UP).doubleValue())
-            .sum());
-        groupRepository.save(group);
+        // List<Expense> expenses = expenseRepository.findByGroup_GroupId(groupId);
+        // Group group = groupRepository.findByGroupId(groupId);
+        // group.setEndDate(LocalDate.now());
+        // group.setTotalExpense(expenses.stream()
+        //     .mapToDouble(Expense::getAmount)
+        //     .map(amount -> BigDecimal.valueOf(amount).setScale(2, RoundingMode.HALF_UP).doubleValue())
+        //     .sum());
+        // groupRepository.save(group);
     
         return transactions;
     }

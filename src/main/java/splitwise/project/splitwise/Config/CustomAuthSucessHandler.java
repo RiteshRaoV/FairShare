@@ -39,7 +39,7 @@ public class CustomAuthSucessHandler implements AuthenticationSuccessHandler {
 
         if (!user.isVerificationStatus()) {
 			request.getSession().setAttribute("verificationMessage", "Your account is not verified. Please verify your account.");
-            response.sendRedirect("/user/sign-in"); // Redirect to a page for verifying the account
+            response.sendRedirect("/sign-in"); // Redirect to a page for verifying the account
             return;
         }
 
@@ -48,7 +48,7 @@ public class CustomAuthSucessHandler implements AuthenticationSuccessHandler {
         if (roles.contains("ROLE_ADMIN")) {
             response.sendRedirect("/swagger-ui.html");
         }else{
-            response.sendRedirect("/user/home");
+            response.sendRedirect("/home");
         }
     }
 

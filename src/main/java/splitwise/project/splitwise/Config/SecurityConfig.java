@@ -41,18 +41,18 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/user/sign-in","/user/sign-up").permitAll()
-                        .requestMatchers("/expenses/**", "/group/**", "/user/home","/balances/**").hasAnyRole("USER","ADMIN")
+                        .requestMatchers("/","/sign-in","/sign-up").permitAll()
+                        .requestMatchers("/expenses/**", "/group/**", "/home","/balances/**").hasAnyRole("USER","ADMIN")
                         .requestMatchers("/swagger-ui.html/**").hasRole("ADMIN")
                         .requestMatchers("/**").permitAll())
                 .formLogin(login -> login
-                        .loginPage("/user/sign-in")
+                        .loginPage("/sign-in")
                         .loginProcessingUrl("/userLogin")
                         .successHandler(sucessHandler)
                         .permitAll())
                 .logout(logout -> logout // Configuring logout
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/user/sign-in")
+                        .logoutSuccessUrl("/")
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID")
                         .permitAll())

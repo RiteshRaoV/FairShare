@@ -17,7 +17,6 @@ import splitwise.project.splitwise.Model.User;
 import splitwise.project.splitwise.Services.UserService;
 
 @Controller
-@RequestMapping("/user")
 public class UserController {
 
     @Autowired
@@ -28,15 +27,15 @@ public class UserController {
         session.removeAttribute("msg");
         if (userService.existsByEmail(user.getEmail())) {
             session.setAttribute("msg", "User with this email already exists.");
-            return "redirect:/user/sign-up";
+            return "redirect:/sign-up";
         } else {
             User savedUser = userService.addUser(user);
             if (savedUser != null) {
                 session.setAttribute("msg", "Registered successfully.");
-                return "redirect:/user/sign-in";
+                return "redirect:/sign-in";
             } else {
                 session.setAttribute("msg", "Something went wrong on the server.");
-                return "redirect:/user/sign-up";
+                return "redirect:/sign-up";
             }
         }
     }
@@ -54,6 +53,11 @@ public class UserController {
     @GetMapping("/home")
     public String homePage(){
         return "Home/homePage";
+    }
+
+    @GetMapping("/")
+    public String landingPage(){
+        return "Home/landing";
     }
 
 }

@@ -1,0 +1,153 @@
+<!-- Start Landing Page -->
+<div class="landing-page">
+    <header>
+        <div class="container">
+            <a href="#" class="logo">Fair<span>Share</span></a>
+        </div>
+    </header>
+    <div class="content">
+        <div class="container">
+            <div class="info">
+                <h1>Manage Your Shared Expenses Effortlessly</h1>
+                <p>FairShare helps you keep track of your shared expenses with ease. Simplify your financial life and stay organized.</p>
+                <a th:href = "@{/sign-up}"><button>Sign Up</button></a>
+                <a th:href = "@{/sign-in}"><button>Sign In</button></a>
+            </div>
+            <div class="image">
+                <img th:src="@{/logo.png}" alt="FairShare App">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Landing Page -->
+
+<style>
+/* Start Global Rules */
+* {
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+a {
+    text-decoration: none;
+}
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.container {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+/* Small */
+@media (min-width: 768px) {
+    .container {
+        width: 750px;
+    }
+}
+/* Medium */
+@media (min-width: 992px) {
+    .container {
+        width: 970px;
+    }
+}
+/* Large */
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px;
+    }
+}
+/* End Global Rules */
+
+/* Start Landing Page */
+.landing-page header {
+    min-height: 80px;
+    display: flex;
+    background-color: #ffffff; /* Teal background for the header */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+@media (max-width: 767px) {
+    .landing-page header {
+        min-height: auto;
+        display: initial;
+    }
+}
+.landing-page header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+@media (max-width: 767px) {
+    .landing-page header .container {
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+.landing-page header .logo {
+    color: #008080; 
+    font-weight: bold;
+    font-style: italic;
+    font-size: 24px; 
+    margin-left: -150px;
+}
+.landing-page header .logo span {
+    color: #008080; /* Light teal for the second part of the logo */
+}
+@media (max-width: 767px) {
+    .landing-page header .logo {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+}
+.landing-page .content .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 140px;
+    min-height: calc(100vh - 80px);
+}
+@media (max-width: 767px) {
+    .landing-page .content .container {
+        gap: 0;
+        min-height: calc(100vh - 101px);
+        justify-content: center;
+        flex-direction: column-reverse;
+    }
+}
+@media (max-width: 767px) {
+    .landing-page .content .info {
+        text-align: center;
+        margin-bottom: 15px;
+    }
+}
+.landing-page .content .info h1 {
+    color: #008080; /* Teal for the heading */
+    font-size: 44px;
+}
+.landing-page .content .info p {
+    margin: 0;
+    line-height: 1.6;
+    font-size: 15px;
+    color: #5d5d5d;
+}
+.landing-page .content .info button {
+    border: 0;
+    border-radius: 20px;
+    padding: 12px 30px;
+    margin-top: 30px;
+    cursor: pointer;
+    color: #FFF;
+    background-color: #008080; /* Teal background for the button */
+}
+.landing-page .content .image img {
+    max-width: 100%;
+}
+/* End Landing Page */
+</style>

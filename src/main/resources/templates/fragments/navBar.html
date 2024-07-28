@@ -2,7 +2,7 @@
     <link rel="stylesheet" th:href="@{/navBar.css}" />
     <nav class="navbar-zxq47">
         <div class="navbar-brand-lpq92">
-            <a th:href="@{/user/home}" class="navbar-logo-tgq39">FairShare</a>
+            <a th:href="@{/home}" class="navbar-logo-tgq39">FairShare</a>
         </div>
         <div class="burger-menu" onclick="toggleSidebar()">
             <div></div>
@@ -10,7 +10,7 @@
             <div></div>
         </div>
         <ul class="navbar-links-wms84">
-            <li><a th:href="@{/user/home}">Home</a></li>
+            <li><a th:href="@{/home}">Home</a></li>
             <li><a th:href="@{/group/create}">Create</a></li>
             <li><a th:href="@{/group}">Groups</a></li>
             <li><a href="#" id="profileIcon" class="profile-icon-ytn62" onclick="openProfileModal()" style="border-bottom: none;">
@@ -22,7 +22,7 @@
     <!-- Sidebar -->
     <div id="mySidebar" class="sidebar">
         <a href="javascript:void(0)" class="close-btn" onclick="toggleSidebar()">&times;</a>
-        <a th:href="@{/user/home}">Home</a>
+        <a th:href="@{/home}">Home</a>
         <a th:href="@{/group/create}">Create</a>
         <a th:href="@{/group}">Groups</a>
         <a href="#" id="profileIcon" class="profile-icon-ytn62" onclick="openProfileModal()" style="border-bottom: none;">
